@@ -4,7 +4,7 @@
 	<head podddina_key="👽 || salvageable" encsum="#empty" podsum="#empty">
 
 		<meta charset="utf-8" lang="en uk">
-		<title>Help | meetHere</title>
+		<title>Support | meetHere</title>
 
 	<!-- Favicons -->
 
@@ -36,7 +36,13 @@
 				</span>
 			</div>
 			<div class="nav-links">
-				<span class="current-page" style="opacity:0.75;">Support</span>
+				<a class="page-link" href="./signup">
+					Sign Up</a>
+				<span class="spacer"></span>
+				<a id="open-modal" class="page-link" href="#" data-modal="#modal1">
+					Login</a>
+				<span class="spacer"></span>
+				<span class="current-page help">Support</span>
 			</div>
 		</div>
 		<!-- navbar END -->
@@ -52,6 +58,22 @@
 		</div>
 		<!-- main -->
 
+		<!-- login modal -->
+		<div class='modal' id='modal1'>
+			<div class='content' style="padding:0;margin:0;">
+				<input id="username" class="mo" placeholder="username" type="name" style="margin-bottom:10px;margin:none;">
+				<br>
+				<input id="password" class="mo" placeholder="password" type="password" style="margin:none;">
+				<br>
+				<a class='btn close-modal' data-modal="#modal1" href="#">Login</a>
+			</div>
+		</div>
+		<!-- login modal END -->
+
+		<!-- scripts -->
+		<script src="./meetHere.js"></script>
+
+	<!-- main container END -->
 	</body>
 
 </html>

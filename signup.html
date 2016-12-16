@@ -41,7 +41,7 @@
 					Login</a>
 				<span class="spacer"></span>
 				<a class="page-link help" href="./help">
-					Help</a>
+					Support</a>
 			</div>
 		</div>
 		<!-- navbar END -->
@@ -114,7 +114,7 @@
 		<!-- scripts -->
 		<script src="./meetHere.js"></script>
 		<script>
-			$(document).keyup(function() {
+			$(document).keyup(function(e) {
 
 				var email = $('#email').val();
 				var password = $('#password').val();
@@ -132,6 +132,19 @@
 					$('#next-2').removeClass('hidden');
 				if (!(validateName(fname)) || !(validateName(lname)) || !(validatePhone(phone)) || !(validateUserName(uname)))
 					$('#next-2').addClass('hidden');
+
+				if(e.which == 13 && !($('#next-1').hasClass('hidden'))){
+					$('#first').slideUp(function() {
+						$('#second').delay(100).slideDown();
+					});
+				}
+
+				if(e.which == 13 && !($('#next-2').hasClass('hidden'))){
+					$('#third').slideUp(function() {
+						$('#last').delay(100).slideDown();
+						$('#centerEr').css('text-align', 'center');
+					});
+				}
 			});
 			$('#next-1').click(function() {
 				$('#first').slideUp(function() {
