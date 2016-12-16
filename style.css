@@ -1,0 +1,114 @@
+/** M-RED		/ 	GRAY		/	BLACK		/	WHITE
+ *	#EB5757			#4F4F4F			#000		#FFF
+ *	235, 87, 87		79, 79, 79		0, 0, 0		255, 255, 255
+ */
+
+body {
+	font-family: Avenir-light;
+	color: #4F4F4F
+}
+
+.navbar {
+	z-index: 999;
+	font-family: proxima-nova
+}
+
+.name {
+	color: #EB5757
+}
+
+.logo {
+    background-image: url(./img/meetHere.jpg);
+}
+
+.brand {
+	font-size: 1.2em;
+	cursor: pointer
+}
+
+.brand:hover {
+	opacity: 0.75
+}
+
+.nav-links {
+	position: fixed;
+	right: 5%;
+	font-size: 1.05em
+}
+
+.page-link {
+	position: relative;
+	display: inline-block;
+	line-height: 1.2em;
+	border: none;
+	color: #EB5757;
+	opacity: 0.5;
+	transition: all 0.15s ease-in-out
+}
+
+.page-link:before {
+	display: block;
+	content: '';
+	border-top: solid 2px;  
+	transform: scaleX(0);  
+	transition: all 0.25s ease-in-out
+}
+
+.page-link:after {
+	display: block;
+	content: '';
+	border-bottom: solid 2px;  
+	transform: scaleX(0);  
+	transition: all 0.25s ease-in-out
+}
+
+.page-link:hover {
+	border: none;
+	opacity: 1
+}
+  
+.page-link:hover:before, .page-link:hover:after{
+	transform: scaleX(1)
+}
+
+.page-link.help {
+	font-size: 0.75em
+}
+
+.page-link.help:hover:before {
+	transform: scaleX(0)
+}
+
+.intro {
+	font-size: 3em;
+}
+
+.bg-west {
+	background-image: url(http://pwnhs.org/img/west.png)
+}
+
+.buffer {
+	height: 50px
+}
+
+.col-third {
+	position: relative;
+	float: left;
+	width: 33.333333%;
+	text-align: center;
+	padding: 75px 0px 25px
+}
+
+.number {
+	background: #EB5757;
+	font-size: 1.5em;
+	padding: 1em 1.25em 0.8em 1.25em;
+	border-radius: 50%;
+	display: inline-block;
+	color: #fff
+}
+
+.label {
+	color: #000;
+	font-weight: 300
+}
