@@ -126,6 +126,22 @@ input:focus {
 	margin-right: 30px
 }
 
+.hidden {
+	display: none !important
+}
+
+.visible {
+	display: inherit !important
+}
+
+.block {
+	display: block
+}
+
+.inline {
+	display: inline-block
+}
+
 /* brand */
 
 .logo {

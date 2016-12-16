@@ -3,7 +3,7 @@ $(".modal").each( function(){
 	$(this).wrap('<div class="overlay"></div>')
 });
 
-$("#open-modal").on('click', function(e){
+$("#open-modal, #open-modal-1").on('click', function(e){
 	e.preventDefault();
 	e.stopImmediatePropagation;
 
