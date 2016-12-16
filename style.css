@@ -23,11 +23,13 @@ body {
 
 .brand {
 	font-size: 1.2em;
-	cursor: pointer
+	cursor: pointer;
+	border: none
 }
 
 .brand:hover {
-	opacity: 0.75
+	opacity: 0.75;
+	border: none
 }
 
 .nav-links {
