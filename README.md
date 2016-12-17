@@ -28,7 +28,7 @@ meetHere is making a new web application to supplement and eventually replace ou
 
 <br><br>
 ![dope ass shit](http://forthebadge.com/images/badges/oooo-kill-em.svg)  
-<br><br>
+<br>
 ## Method 
 1. Choose Friends
 2. Choose Type (Food / Fun / Study)
