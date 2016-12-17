@@ -5,7 +5,7 @@ $(".modal").each( function(){
 
 $("#open-modal, #open-modal-1").on('click', function(e){
 	e.preventDefault();
-	e.stopImmediatePropagation;
+	e.stopImmediatePropagation();
 
 	var $this = $(this),
 			modal = $($this).data("modal");
@@ -33,7 +33,7 @@ $("#open-modal, #open-modal-1").on('click', function(e){
 
 $(".close-modal").on('click', function(e){
 	e.preventDefault();
-	e.stopImmediatePropagation;
+	e.stopImmediatePropagation();
 
 	var $this = $(this),
 			modal = $($this).data("modal");

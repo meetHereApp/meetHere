@@ -48,6 +48,7 @@ body {
 
 .top:hover {
     -webkit-animation: bounce 0.75s;
+    -moz-animation: bounce 0.75s;
     animation: bounce 0.75s
 }
 
@@ -173,7 +174,7 @@ body {
 	float: left;
 	width: 33.333333%;
 	text-align: center;
-	padding: 75px 0px 25px
+	padding: 75px 0 25px
 }
 
 .number {
@@ -259,6 +260,7 @@ input:not(.mo), input:not(.mo):focus {
 	position: fixed;
 	top: 0;
 	left: 0;
+	background: rgb(0, 0, 0); /* fallback */
 	background: rgba(0, 0, 0, 0.75);
 	opacity: 0;
 	pointer-events: none;
@@ -288,7 +290,7 @@ input:not(.mo), input:not(.mo):focus {
 .overlay .modal.open .content {
 	transform: translate(0, 0px);
 	opacity: 1;
-	padding: none
+	padding: 0
 }
 .overlay .modal .content {
 	transform: translate(0, -10px);
@@ -319,7 +321,7 @@ input, .password, .button {
 	font-size: 2em;
 	background: #EF7A7A; /* #ED6969*/
 	color: black;
-	padding: 0px 10px 2px 10px;
+	padding: 0 10px 2px 10px;
 	cursor: pointer
 }
 
@@ -353,6 +355,7 @@ input, .password, .button {
 }
 
 .theme-highlight:after {
+	background: rgb(235, 87, 87); /* fallback */
 	background: rgba(235, 87, 87, 0.75)
 }
 

@@ -63,7 +63,7 @@ function setFillScreenunitHeight()
 		window.fillBodyHeight = 0;
 		$(this).find('.container').each(function(i) // Loop all fill Screens
 		{
-			fillPadding = parseInt($(this).css('padding-top'))*2
+			fillPadding = parseInt($(this).css('padding-top'), 10)*2
 			
 			if(parentFillDiv.hasClass('unit-group')) // unit Groups
 			{
@@ -93,11 +93,11 @@ function getFillHeight()
 // Scroll to target
 function scrollToTarget(D)
 {
-	if(D == 1) // Top of page
+	if(D === 1) // Top of page
 	{
 		D = 0;
 	}
-	else if(D == 2) // Bottom of page
+	else if(D === 2) // Bottom of page
 	{
 		D = $(document).height();
 	}
@@ -132,7 +132,7 @@ function animateWhenVisible()
 		scrollToTopView(); // ScrollToTop button visability toggle
 		stickyNavToggle(); // Sticky nav toggle
 	});		
-};
+}
 
 // Set Up Dropdown Menu Support
 function setUpDropdownSubs()
@@ -209,7 +209,7 @@ function inViewCheck()
 			setTimeout(function(){target.attr('class',objectClass).css('visibility','visible');},0.01);				
 		}
 	});
-};
+}
 
 // ScrollToTop button toggle
 function scrollToTopView()
@@ -225,12 +225,12 @@ function scrollToTopView()
 	{
 		$('.scrollToTop').removeClass('showScrollTop');
 	}
-};
+}
 
 // Light box support
 function setUpLightBox()
 {
-	window.targetLightbox;
+	window.targetLightbox();
 	
 	$(document).on('click', '[data-lightbox]', function(e) // Create Lightbox Modal
 	{
@@ -247,11 +247,11 @@ function setUpLightBox()
 		$('#lightbox-modal').modal('show');
 		
 		// Handle navigation buttons (next - prev)
-		if($('a[data-lightbox]').index(targetLightbox) == 0)
+		if($('a[data-lightbox]').index(targetLightbox) === 0)
 		{
 			$('.prev-lightbox').hide();
 		}
-		if($('a[data-lightbox]').index(targetLightbox) == $('a[data-lightbox]').length-1)
+		if($('a[data-lightbox]').index(targetLightbox) === $('a[data-lightbox]').length-1)
 		{
 			$('.next-lightbox').hide();
 		}
@@ -276,12 +276,7 @@ function setUpLightBox()
 		targetLightbox = next;	
 		
 		// Handle navigation buttons (next - prev)
-		$('.next-lightbox, .prev-lightbox').hide();	
-		
-		if($('a[data-lightbox]').index(next) != $('a[data-lightbox]').length-1)
-		{
-			$('.next-lightbox').show();
-		}
+		$('.next-lightbox, .prev-lightbox').hide();
 		if($('a[data-lightbox]').index(next) > 0)
 		{
 			$('.prev-lightbox').show();
