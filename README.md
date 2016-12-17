@@ -5,7 +5,7 @@
 > * Forward "they"
 
 ## Prime
-> * Backend: npm, ruby
+> * Backend: `npm`, `ruby`
 > * Scale
 
 ## Disc (y / n / ?)
