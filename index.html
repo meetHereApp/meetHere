@@ -52,12 +52,26 @@
 		
 		<div class="buffer"></div>
 		
+				
 		<!-- intro -->
 		<div class="intro">
-			<div class="unit unit-lg-rel parallax-bg bg-west">
+			<svg class="center-total anim" viewBox="0 0 80 60" id="prop2">
+				<line data-ignore id="df2" x1="28" y1="30" x2="44" y2="30" transform="translate(0 6.9)"/> 
+				<line id="cb2" x1="40" y1="30" x2="48" y2="30" transform="rotate(-60 48 30)"/>
+
+				<line id="ab2" x1="40" y1="30" x2="48" y2="30"/>
+				<line id="ad2" x1="40" y1="30" x2="48" y2="30" transform="rotate(60 40 30)"/>
+				<circle id="c4" cx="44" cy="36.9" r="16"/>
+				<line id="ae2" x1="44" y1="36.9" x2="60" y2="36.9" transform="rotate(60 44 36.9)"/>
+
+				<circle id="c3" cx="40" cy="30" r="24"/>
+				<line id="bc2" x1="48" y1="30" x2="63.75" y2="30"/>
+				<path data-ignore id="p2" d="M 48 30 L 48.25 30" /> 
+			</svg>
+			<div class="unit unit-lg-rel parallax-bg">
 				<div class="row">
 					<div class="intro-text">
-						<span class="name">meetHere.</span> Set up an <span class="highlight theme-highlight">equidistant</span> meeting location with all your peers.
+						<span class="name">meetHere.</span> Set up an <span class="highlight theme-highlight">equidistant</span>, <span class="highlight bisque-highlight">reliable</span> meeting location with all your peers.
 					</div>
 				</div>
 			</div>
@@ -100,6 +114,10 @@
 		<!-- login modal END -->
 
 		<!-- scripts -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vivus/0.3.2/vivus.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+		
+		
 		<script src="./meetHere.js"></script>
 		<script>
 		$(document).ready(function() {
@@ -123,6 +141,22 @@
 				transition: function(url){ window.location.href = url; }
 			});
 		});
+			
+		new Vivus('prop2', {
+				type: "oneByOne", 
+				duration: 250,
+				pathTimingFunction: Vivus.EASE
+			}, vivusRep);
+			
+		function vivusRep() {
+			setTimeout(function() { 
+				new Vivus('prop2', {
+					type: "oneByOne", 
+					duration: 250,
+					pathTimingFunction: Vivus.EASE
+				}, vivusRep);
+			}, 5000);
+		}
 		</script>
 		
 	<!-- main container END -->

@@ -351,7 +351,15 @@ input, .password, .button {
 }
 
 .gray-highlight:after {
-	background: #e4e4e4
+	background: #E4E4E4
+}
+
+.bisque-highlight:after {
+	background: #F0DAC5
+}
+
+.sky-highlight:after {
+	background: #91DCE8
 }
 
 .theme-highlight:after {
@@ -361,4 +369,43 @@ input, .password, .button {
 
 .theme-light-highlight:after {
 	background: #F5AFAF
+}
+
+svg.anim {
+	position: fixed;
+	width: 60%;
+	height: auto;
+	stroke-width: 0.5px
+}
+
+svg.anim > * {
+	transition: opacity 1.5s ease
+}
+
+#df2, #p2 {
+	stroke: #A0A0A0
+}
+
+#ae2 {
+	stroke: #F0DAC5
+}
+
+#ab2, #ad2, #c3 {
+	stroke: #F5AFAF
+}
+
+#bc2, #c2, #c4 {
+	stroke: #91DCE8
+}
+
+#c2, #c3, #c4, #c5 {
+	fill: none
+}
+
+#p2 {
+	stroke-linecap: round
+}
+
+#cb2 {
+	stroke: #E9E6E3
 }
