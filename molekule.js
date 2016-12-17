@@ -57,21 +57,21 @@ $(window).load(function()
 // Set Fill Screen unit heights
 function setFillScreenunitHeight()
 {
-	$('.unit-fill-screen').each(function(i) // Loop all fill Screens
+	$('.unit-fill-screen').each(function() // Loop all fill Screens
 	{
 		var parentFillDiv = $(this);
 		window.fillBodyHeight = 0;
-		$(this).find('.container').each(function(i) // Loop all fill Screens
+		$(this).find('.container').each(function() // Loop all fill Screens
 		{
-			fillPadding = parseInt($(this).css('padding-top'), 10)*2
+			window.fillPadding = parseInt($(this).css('padding-top'), 10)*2
 			
 			if(parentFillDiv.hasClass('unit-group')) // unit Groups
 			{
-				fillBodyHeight = fillPadding + $(this).outerHeight()+50; // Set unit body height
+				window.fillBodyHeight = fillPadding + $(this).outerHeight()+50; // Set unit body height
 			}
 			else
 			{
-				fillBodyHeight = fillBodyHeight + fillPadding + $(this).outerHeight()+50; // Set unit body height
+				window.fillBodyHeight = fillBodyHeight + fillPadding + $(this).outerHeight()+50; // Set unit body height
 			}
 		});
 		$(this).css('height', (getFillHeight()) + 'px'); // Set Fill height
@@ -179,7 +179,7 @@ function stickyNavToggle()
 // Hide all animation elements
 function hideAll()
 {
-	$('.animated').each(function(i)
+	$('.animated').each(function()
 	{	
 		if(!$(this).closest('.unit').length) // Dont hide unit object
 		{
@@ -191,7 +191,7 @@ function hideAll()
 // Check if object is inView
 function inViewCheck()
 {	
-	$($(".hideMe").get().reverse()).each(function(i)
+	$($(".hideMe").get().reverse()).each(function()
 	{	
 		var target = jQuery(this);
 		var a = target.offset().top + target.height();
@@ -235,7 +235,7 @@ function setUpLightBox()
 	$(document).on('click', '[data-lightbox]', function(e) // Create Lightbox Modal
 	{
 		e.preventDefault();
-		targetLightbox = $(this);
+		window.targetLightbox = $(this);
 		var captionData ='<p class="lightbox-caption">'+$(this).attr('data-caption')+'</p>';
 		if(!$(this).attr('data-caption')) // No caption caption data
 		{
@@ -247,7 +247,7 @@ function setUpLightBox()
 		$('#lightbox-modal').modal('show');
 		
 		// Handle navigation buttons (next - prev)
-		if($('a[data-lightbox]').index(targetLightbox) === 0)
+		if($('a[data-lightbox]').index(window.targetLightbox) === 0)
 		{
 			$('.prev-lightbox').hide();
 		}
@@ -273,7 +273,7 @@ function setUpLightBox()
 		}
 		$('#lightbox-image').attr('src',next.attr('data-lightbox'));
 		$('.lightbox-caption').html(next.attr('data-caption'));
-		targetLightbox = next;	
+		window.targetLightbox = next;
 		
 		// Handle navigation buttons (next - prev)
 		$('.next-lightbox, .prev-lightbox').hide();
