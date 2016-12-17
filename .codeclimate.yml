@@ -2,6 +2,13 @@
 engines:
   csslint:
     enabled: true
+	checks:
+      important:
+        enabled: false
+		#necessary for hidden styles
+      box-sizing:
+        enabled: false
+		#who the hell still uses IE 6
   duplication:
     enabled: true
     config:
