@@ -45,18 +45,18 @@ $(".close-modal").on('touchend || click', function(e){
 
 });
 
-function validateEmail(email) {
+var validateEmail = function(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
-function validateName(name) {
+var validateName = function(name) {
 	return /^[a-zA-Z]+$/.test(name);
 }
 
-function validateUserName(name) {
+var validateUserName = function(name) {
 	return /^[a-zA-Z0-9.-]+$/.test(name);
 }
 
-function validatePhone(phone) {
+var validatePhone = function(phone) {
 	return /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/.test(phone);
 }
