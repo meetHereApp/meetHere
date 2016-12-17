@@ -117,7 +117,7 @@ function scrollToTarget(D)
 function animateWhenVisible()
 {
 	hideAll(); // Hide all animation elements
-	inViewCheck(); // Initail check on page load
+	inViewCheck(); // Initial check on page load
 	
 	$(window).scroll(function()
 	{		
