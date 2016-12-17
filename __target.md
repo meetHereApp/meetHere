@@ -15,7 +15,7 @@
 ## Allot
 > * 4
 
-# Method 
+## Method 
 1. Choose Friends
 2. Choose Type (Food / Fun / Study)
 3. Determines Locations and shows nearby PoI
