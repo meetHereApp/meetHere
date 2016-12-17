@@ -121,7 +121,7 @@ function animateWhenVisible()
 	
 	$(window).scroll(function()
 	{		
-		inViewCheck(); // Check object visability on page scroll
+		inViewCheck(); // Check object visibility on page scroll
 		scrollToTopView(); // ScrollToTop button visability toggle
 		stickyNavToggle(); // Sticky nav toggle
 	});		
