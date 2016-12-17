@@ -113,13 +113,6 @@ function scrollToTarget(D)
 	$('html,body').animate({scrollTop:D}, 'slow');
 }
 
-// Initial tooltips
-$(function()
-{
-  $('[data-toggle="tooltip"]').tooltip()
-})
-
-
 // Animate when visible
 function animateWhenVisible()
 {
@@ -153,64 +146,6 @@ function setUpDropdownSubs()
 	});
 }
 
-// Hide all animation elements
-function stickyNavToggle()
-{
-	var V = 0; // offset Value
-	var C = "sticky"; // Classes
-	
-	if($('.sticky-nav').hasClass('fill-unit-top-edge')) // If nav is in unit animate in
-	{
-		V = $('.sticky-nav').height();
-		C = "sticky animated fadeInDown";
-	}
-	
-	if($(window).scrollTop() > V)
-	{  
-		$('.sticky-nav').addClass(C);
-	}
-	else
-	{
-		$('.sticky-nav').removeClass(C);
-		$('.page-container').removeAttr('style');
-	}	
-}
-
-// Hide all animation elements
-function hideAll()
-{
-	$('.animated').each(function()
-	{	
-		if(!$(this).closest('.unit').length) // Dont hide unit object
-		{
-			$(this).removeClass('animated').addClass('hideMe');
-		}
-	});
-}
-
-// Check if object is inView
-function inViewCheck()
-{	
-	$($(".hideMe").get().reverse()).each(function()
-	{	
-		var target = jQuery(this);
-		var a = target.offset().top + target.height();
-		var b = $(window).scrollTop() + $(window).height();
-		
-		if(target.height() > $(window).height()) // If object height is greater than window height
-		{
-			a = target.offset().top;
-		}
-		
-		if (a < b) 
-		{	
-			var objectClass = target.attr('class').replace('hideMe' , 'animated');
-			target.css('visibility','hidden').removeAttr('class');
-			setTimeout(function(){target.attr('class',objectClass).css('visibility','visible');},0.01);				
-		}
-	});
-}
-
 // ScrollToTop button toggle
 function scrollToTopView()
 {
@@ -225,61 +160,4 @@ function scrollToTopView()
 	{
 		$('.scrollToTop').removeClass('showScrollTop');
 	}
-}
-
-// Light box support
-function setUpLightBox()
-{
-	window.targetLightbox();
-	
-	$(document).on('click', '[data-lightbox]', function(e) // Create Lightbox Modal
-	{
-		e.preventDefault();
-		window.targetLightbox = $(this);
-		var captionData ='<p class="lightbox-caption">'+$(this).attr('data-caption')+'</p>';
-		if(!$(this).attr('data-caption')) // No caption caption data
-		{
-			captionData = '';
-		}
-		
-		var customModal = $('<div id="lightbox-modal" class="modal fade"><div class="modal-dialog"><div class="modal-content '+$(this).attr('data-frame')+'"><button type="button" class="close close-lightbox" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="modal-body"><a href="#" class="prev-lightbox" aria-label="prev"></a><a href="#" class="next-lightbox" aria-label="next"></a><img id="lightbox-image" class="img-responsive" src="'+$(this).attr('data-lightbox')+'">'+captionData+'</div></div></div></div>');
-		$('body').append(customModal);
-		$('#lightbox-modal').modal('show');
-		
-		// Handle navigation buttons (next - prev)
-		if($('a[data-lightbox]').index(window.targetLightbox) === 0)
-		{
-			$('.prev-lightbox').hide();
-		}
-		if($('a[data-lightbox]').index(window.targetLightbox) === $('a[data-lightbox]').length-1)
-		{
-			$('.next-lightbox').hide();
-		}
-	}
-	).on('hidden.bs.modal', '#lightbox-modal', function () // Handle destroy modal 
-	{
-		$('#lightbox-modal').remove();
-	})
-	
-	$(document).on('click', '.next-lightbox, .prev-lightbox', function(e) 
-	{
-		e.preventDefault();
-		var idx = $('a[data-lightbox]').index(window.targetLightbox);
-		var next = $('a[data-lightbox]').eq(idx+1) // Next
-		
-		if($(this).hasClass('prev-lightbox'))
-		{
-			next = $('a[data-lightbox]').eq(idx-1) // Prev
-		}
-		$('#lightbox-image').attr('src',next.attr('data-lightbox'));
-		$('.lightbox-caption').html(next.attr('data-caption'));
-		window.targetLightbox = next;
-		
-		// Handle navigation buttons (next - prev)
-		$('.next-lightbox, .prev-lightbox').hide();
-		if($('a[data-lightbox]').index(next) > 0)
-		{
-			$('.prev-lightbox').show();
-		}
-	});
 }
