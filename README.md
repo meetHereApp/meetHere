@@ -23,7 +23,7 @@ meetHere is making a new web application to supplement and eventually replace ou
 > * Pre-process (HAML / ?)
 
 ## Allot
-> * 4  
-<br><br>
+> * 4
 
+<br>
 ![dope ass shit](http://forthebadge.com/images/badges/oooo-kill-em.svg)  
