@@ -41,7 +41,7 @@ body {
 	border: none
 }
 
-.brand:hover {
+.brand:hover, .brand:active {
 	opacity: 0.75;
 	border: none
 }
