@@ -236,6 +236,19 @@ input:not(.mo), input:not(.mo):focus {
 	max-width: 600px;
 }
 
+.material, .material-button {
+	transition: all 0.25s ease-in-out
+}
+
+.material, .material-button:hover {
+	transition: all 0.25s ease-in-out;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2)
+}
+
+.material:focus {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)
+}
+
 .modal > .content > .btn {
 	padding: 10px 20px;
 	display: inline-block;
@@ -325,6 +338,21 @@ input, .password, .button {
 	cursor: pointer
 }
 
+.support-button {
+	height: 1.75em;
+	line-height: 2em;
+	font-size: 2em;
+	background: #EF7A7A; /* #ED6969*/
+	color: #E4E4E4;
+	padding: 0 10px 2px 10px;
+	margin-right: 0.5em;
+	cursor: pointer
+}
+
+.support-button:last-of-type {
+	margin: 0
+}
+
 .highlight {
 	position: relative;
 	display: inline-block;
@@ -408,4 +436,19 @@ svg.anim > * {
 
 #cb2 {
 	stroke: #E9E6E3
+}
+
+.support-backdrop {
+	position: fixed;
+	bottom: 0;
+	background: #EB5757
+}
+
+.sup-name, .support-backdrop-title {
+	cursor: pointer
+}
+
+.fa-angle-down {
+	vertical-align: middle;
+	color: #A0A0A0
 }

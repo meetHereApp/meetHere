@@ -216,13 +216,17 @@ input:focus {
 	width: 90vw
 }
 
-.col-max {
+.col-100 {
 	width: 100vw
 }
 
-/* rows: 30-40-50-60-
-		 70-80-90-100
+/* rows: 25-30-40-50-
+		 60-70-75-80-
+		 90-100
 */
+.row-25 {
+	height: 25vh
+} 
 .row-30 {
 	height: 30vh
 }
@@ -241,6 +245,10 @@ input:focus {
 
 .row-70 {
 	height: 70vh
+}
+
+.row-75 {
+	height: 75vh
 }
 
 .row-80 {

@@ -49,15 +49,57 @@
 		<!-- navbar END -->
 
 		<!-- main -->
-		<div class="center-total">
+		<div id="support-hero" class="center-total">
 			<div class="sup">What's Wrong?</div>
-			<div class="sup">Password/Username</div>
-			<div class="sup">Adding Friends</div>
-			<div class="sup">Payment Info</div>
-			<div class="sup">Location</div>
-			<div class="sup">Other</div>
+			<div id="pass" class="sup sup-name">Password/Username</div>
+			<div id="friends" class="sup sup-name">Adding Friends</div>
+			<div id="payment" class="sup sup-name">Payment Info</div>
+			<div id="location" class="sup sup-name">Location</div>
+			<div id="misc" class="sup sup-name">Other</div>
 		</div>
-		<!-- main -->
+		<!-- main END -->
+		
+		<!-- password support -->
+		<div id="pass-support" class="col-100 row-80 support-backdrop" style="display:none">
+			<div class="support-backdrop-title" style="background:white;padding:0 0 0.5em 1em;font-size:2em;color:#EB5757">Password/Username<span style="position:absolute;right:1em;color:black;line-height:1.25em"><i class="fa fa-angle-down"></i></span></div>
+			<div class="text-center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+				<div id="password-main">
+					<h1 style="color:#fff">Enter your email:</h1>
+					<input id="password-email" class="material" placeholder="name@example.com" type="email" autocorrect="false" spellcheck="false">
+					<br>
+					<div class="support-button password-button material-button inline">Send username</div>
+					<div class="support-button password-button material-button inline">Reset password</div>
+				</div>
+				<div id="password-callback" style="display:none">
+					<h1 style="color:#fff">Awesome! Check your email for the next steps.</h1>
+				</div>
+			</div>
+		</div> 
+		<!-- password support END -->
+		
+		<!-- friends support -->
+		<div id="friends-support" class="col-100 row-80 support-backdrop" style="display:none">
+			<div class="support-backdrop-title" style="background:white;padding:0 0 0.5em 1em;font-size:2em;color:#EB5757">Adding Friends<span style="position:absolute;right:1em;color:black;line-height:1.25em"><i class="fa fa-angle-down"></i></span></div>
+		</div> 
+		<!-- friends support END -->
+		
+		<!-- payment support -->
+		<div id="payment-support" class="col-100 row-80 support-backdrop" style="display:none">
+			<div class="support-backdrop-title" style="background:white;padding:0 0 0.5em 1em;font-size:2em;color:#EB5757">Payment Info<span style="position:absolute;right:1em;color:black;line-height:1.25em"><i class="fa fa-angle-down"></i></span></div>
+		</div> 
+		<!-- password support END -->
+		
+		<!-- location support -->
+		<div id="location-support" class="col-100 row-80 support-backdrop" style="display:none">
+			<div class="support-backdrop-title" style="background:white;padding:0 0 0.5em 1em;font-size:2em;color:#EB5757">Location<span style="position:absolute;right:1em;color:black;line-height:1.25em"><i class="fa fa-angle-down"></i></span></div>
+		</div> 
+		<!-- location support END -->
+		
+		<!-- misc support -->
+		<div id="misc-support" class="col-100 row-80 support-backdrop" style="display:none">
+			<div class="support-backdrop-title" style="background:white;padding:0 0 0.5em 1em;font-size:2em;color:#EB5757">Other<span style="position:absolute;right:1em;color:black;line-height:1.25em"><i class="fa fa-angle-down"></i></span></div>
+		</div> 
+		<!-- misc support END -->
 
 		<!-- login modal -->
 		<div class='modal' id='modal1'>
@@ -94,6 +136,38 @@
 				overlayParentElement : 'body',
 				transition: function(url){ window.location.href = url; }
 			});
+		});
+			
+		$('.sup-name').on('touchend || click', function() {
+			var id = $(this).attr('id');
+			$('#support-hero').slideUp("fast", function() {
+				$('#' + id + '-support').slideDown("fast");
+			});
+		});
+			
+		$('.support-backdrop-title').on('touchend || click', function() {
+			$('.support-backdrop').slideUp("fast", function() {
+				$('#support-hero').delay(250).slideDown("fast");
+			});
+			setTimeout(function() {
+				$('#password-callback').hide("fast", function() {
+					$('#password-main').show();
+				});
+			}, 1000);
+		});
+			
+		$('.password-button').on('touchend || click', function() {
+			$('#password-main').hide("fast", function() {
+				$('#password-callback').show();
+			});
+		});
+			
+		$(document).keyup(function(e) {
+			var email = $('#password-email').val();
+			if(!(validateEmail(email)) || email == "")
+				$('.password-button').hide();
+			else
+				$('.password-button').show();
 		});
 		</script>
 

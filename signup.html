@@ -161,42 +161,30 @@
 					$('#next-2').addClass('hidden');
 
 				if(e.which == 13 && !($('#next-1').hasClass('hidden'))){
-					$('#first').slideUp(function() {
-						$('#second').delay(100).slideDown();
+					$('#first').slideUp("fast", function() {
+						$('#second').delay(100).slideDown("fast");
 					});
 				}
 
 				if(e.which == 13 && !($('#next-2').hasClass('hidden'))){
-					$('#third').slideUp(function() {
-						$('#last').delay(100).slideDown();
+					$('#third').slideUp("fast", function() {
+						$('#last').delay(100).slideDown("fast");
 						$('#centerEr').css('text-align', 'center');
 					});
 				}
 			});
-			$('#next-1').click(function() {
-				$('#first').slideUp(function() {
-					$('#second').delay(100).slideDown();
+			$('#next-1').on('touchend || click', function() {
+				$('#first').slideUp("fast", function() {
+					$('#second').delay(100).slideDown("fast");
 				});
 			});
-			$('#next-2').click(function() {
-				$('#third').slideUp(function() {
-					$('#last').delay(100).slideDown();
+			$('#next-2').on('touchend || click', function() {
+				$('#third').slideUp("fast", function() {
+					$('#last').delay(100).slideDown("fast");
 					$('#centerEr').css('text-align', 'center');
 				});
 			})
-
-			function validateEmail(email) {
-				return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
-			}
-			function validateName(name) {
-				return /^[a-zA-Z]+$/.test(name);
-			}
-			function validateUserName(name) {
-				return /^[a-zA-Z0-9.-]+$/.test(name);
-			}
-			function validatePhone(phone) {
-				return /^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/.test(phone);
-			}
+			
 		</script>
 
 	<!-- main container END -->
