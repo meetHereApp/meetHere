@@ -67,11 +67,11 @@ function setFillScreenunitHeight()
 			
 			if(parentFillDiv.hasClass('unit-group')) // unit Groups
 			{
-				window.fillBodyHeight = fillPadding + $(this).outerHeight()+50; // Set unit body height
+				window.fillBodyHeight = window.fillPadding + $(this).outerHeight()+50; // Set unit body height
 			}
 			else
 			{
-				window.fillBodyHeight = fillBodyHeight + fillPadding + $(this).outerHeight()+50; // Set unit body height
+				window.fillBodyHeight = window.fillBodyHeight + window.fillPadding + $(this).outerHeight()+50; // Set unit body height
 			}
 		});
 		$(this).css('height', (getFillHeight()) + 'px'); // Set Fill height
@@ -83,9 +83,9 @@ function getFillHeight()
 {
 	var H = $(window).height(); // Window height
 	
-	if(H < fillBodyHeight) // If window height is less than content height
+	if(H < window.fillBodyHeight) // If window height is less than content height
 	{
-		H = fillBodyHeight+100;
+		H = window.fillBodyHeight+100;
 	}
 	return H
 }
@@ -251,7 +251,7 @@ function setUpLightBox()
 		{
 			$('.prev-lightbox').hide();
 		}
-		if($('a[data-lightbox]').index(targetLightbox) === $('a[data-lightbox]').length-1)
+		if($('a[data-lightbox]').index(window.targetLightbox) === $('a[data-lightbox]').length-1)
 		{
 			$('.next-lightbox').hide();
 		}
@@ -264,7 +264,7 @@ function setUpLightBox()
 	$(document).on('click', '.next-lightbox, .prev-lightbox', function(e) 
 	{
 		e.preventDefault();
-		var idx = $('a[data-lightbox]').index(targetLightbox);
+		var idx = $('a[data-lightbox]').index(window.targetLightbox);
 		var next = $('a[data-lightbox]').eq(idx+1) // Next
 		
 		if($(this).hasClass('prev-lightbox'))
