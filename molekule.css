@@ -39,7 +39,14 @@ input:focus {
 	border: none
 }
 
-a, a:hover, a:active, input, input:focus {
+a,
+a:hover,
+a:active,
+input,
+input:focus,
+div,
+div:hover,
+div:active {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-border-radius:0px
 }
