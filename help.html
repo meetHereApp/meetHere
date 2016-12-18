@@ -161,9 +161,11 @@
 				$('#password-callback').show();
 			});
 		});
+		
+		var email = $('#password-email').val();
 			
 		$(document).keyup(function(e) {
-			var email = $('#password-email').val();
+			email = $('#password-email').val();
 			if(!(validateEmail(email)) || email == "")
 				$('.password-button').hide();
 			else
