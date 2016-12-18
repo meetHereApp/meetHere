@@ -29,7 +29,7 @@
 
 	</head>
 
-	<body class="animsition" ontouchstart="">
+	<body class="animsition">
 
 		<!-- navbar -->
 		<div class="navbar hero">
@@ -66,7 +66,7 @@
 			<div class="text-center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
 				<div id="password-main">
 					<h1 style="color:#fff">Enter your email:</h1>
-					<input id="password-email" class="material" placeholder="name@example.com" type="email" autocorrect="false" spellcheck="false">
+					<input id="password-email" class="material" placeholder="name@example.com" type="email" autocorrect="false" spellcheck="false" ontouchstart="">
 					<br>
 					<div class="support-button password-button material-button inline" style="display:none">Send username</div>
 					<div class="support-button password-button material-button inline" style="display:none">Reset password</div>
@@ -171,9 +171,9 @@
 				$('.password-button').show();
 		});
 
-		/*$('#password-email').on('touchend || click', function() {
+		$('#password-email').on('touchend || click', function() {
 			$(this).focus();
-		});*/
+		});
 		</script>
 
 	<!-- main container END -->
