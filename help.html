@@ -67,8 +67,8 @@
 					<h1 style="color:#fff">Enter your email:</h1>
 					<input id="password-email" class="material" placeholder="name@example.com" type="email" autocorrect="false" spellcheck="false">
 					<br>
-					<div class="support-button password-button material-button inline">Send username</div>
-					<div class="support-button password-button material-button inline">Reset password</div>
+					<div class="support-button password-button material-button inline" style="display:none">Send username</div>
+					<div class="support-button password-button material-button inline" style="display:none">Reset password</div>
 				</div>
 				<div id="password-callback" style="display:none">
 					<h1 style="color:#fff">Awesome! Check your email for the next steps.</h1>
@@ -161,12 +161,10 @@
 				$('#password-callback').show();
 			});
 		});
-		
-		var email = $('#password-email').val();
 			
 		$(document).keyup(function(e) {
 			email = $('#password-email').val();
-			if(!(validateEmail(email)) || email == "")
+			if(!(validateEmail(email)))
 				$('.password-button').hide();
 			else
 				$('.password-button').show();
