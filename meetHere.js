@@ -3,27 +3,27 @@ $(".modal").each( function(){
 	$(this).wrap('<div class="overlay"></div>')
 });
 
-$("#open-modal, #open-modal-1").on('touchend || click', function(e){
+$('#open-modal, #open-modal-1').on('touchend || click', function(e){
 	e.preventDefault();
 	e.stopImmediatePropagation();
 
 	var $this = $(this),
-			modal = $($this).data("modal");
+			modal = $($this).data('modal');
 
-	$(modal).parents(".overlay").addClass("open");
+	$(modal).parents('.overlay').addClass('open');
 	setTimeout( function(){
-		$(modal).addClass("open");
+		$(modal).addClass('open');
 	}, 350);
 
 	$(document).on('touchend || click', function(e){
 		var target = $(e.target);
 
-		if ($(target).hasClass("overlay")){
-			$(target).find(".modal").each( function(){
-				$(this).removeClass("open");
+		if ($(target).hasClass('overlay')){
+			$(target).find('.modal').each( function(){
+				$(this).removeClass('open');
 			});
 			setTimeout( function(){
-				$(target).removeClass("open");
+				$(target).removeClass('open');
 			}, 350);
 		}
 
@@ -31,20 +31,26 @@ $("#open-modal, #open-modal-1").on('touchend || click', function(e){
 
 });
 
-$(".close-modal").on('touchend || click', function(e){
+$('.close-modal').on('touchend || click', function(e){
 	e.preventDefault();
 	e.stopImmediatePropagation();
 
 	var $this = $(this),
-			modal = $($this).data("modal");
+			modal = $($this).data('modal');
 
-	$(modal).removeClass("open");
+	$(modal).removeClass('open');
 	setTimeout( function(){
-		$(modal).parents(".overlay").removeClass("open");
+		$(modal).parents('.overlay').removeClass('open');
 	}, 350);
 
 });
 
+$(document).keyup(function(e) {
+	if(e.which == 13 && $('#modal1').hasClass('open'))
+		$('.close-modal').click();
+});
+
+// Validation
 var validateEmail = function(email) {
 	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
