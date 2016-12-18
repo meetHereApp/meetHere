@@ -39,6 +39,11 @@ input:focus {
 	border: none
 }
 
+a, a:hover, a:active, input, input:focus {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-border-radius:0px
+}
+
 /* banners */
 
 .hero {
