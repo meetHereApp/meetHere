@@ -22,15 +22,19 @@
 		<link rel="stylesheet" type="text/css" href="./molekule.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
 		<style>
-			input:not(.mo), input:not(.mo):focus {
-				font-size: 7vw
-			}
-			.button {
-				font-size: 7vw
-			}
-			.mobile-input-max {
-				width: 80vw !important;
-				max-width: 80vw !important
+			@media only screen and (max-width: 799px) {
+				input:not(.mo), input:not(.mo):focus {
+					font-size: 7vw
+				}
+				.button {
+					font-size: 7vw
+				}
+				.mobile-input-max {
+					width: 90vw !important;
+				}
+				.hidden-mobile {
+					display: none !important
+				}
 			}
 		</style>
 
@@ -94,10 +98,10 @@
 							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">Phone Number</div>
 							<input class="mobile-input-max" id="phone" placeholder="419-270-9201" autocorrect="false" spellcheck="false" maxlength="15" style="width:40vw;max-width:300px">
 						</div>
-						<div style="display:inline-block;width:10vw;max-width:25px"></div>
+						<div class="hidden-mobile" style="display:inline-block;width:10vw;max-width:25px"></div>
 						<div class="inline">
 							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px"><span class="highlight theme-light-highlight">Username</span></div>
-							<div class="mobile-input-max" class="input-container" style="width:40vw;max-width:300px">
+							<div class="input-container mobile-input-max" style="width:40vw;max-width:300px">
 								<input class="mobile-input-max" id="uname" class="password" placeholder="bGanesh" type="text" autocorrect="false" spellcheck="false" style="width:40vw;max-width:300px">
 								<div id="next-2" class="button inline hidden">Next</div>
 							</div>
@@ -202,6 +206,8 @@
 					$('#third').slideUp("fast", function() {
 						$('#last').delay(100).slideDown("fast");
 						$('#centerEr').css('text-align', 'center');
+						$('#centerEr').css('padding-top', '0');
+						$('#centerEr').addClass('center-total');
 					});
 				}
 			});
@@ -216,6 +222,8 @@
 				$('#third').slideUp("fast", function() {
 					$('#last').delay(100).slideDown("fast");
 					$('#centerEr').css('text-align', 'center');
+					$('#centerEr').css('padding-top', '0');
+					$('#centerEr').addClass('center-total');
 				});
 			})
 			
