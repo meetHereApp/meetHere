@@ -493,6 +493,15 @@ svg.anim > * {
 		max-width: 90vw;
 		margin-bottom: 15%;
 	}
+	.create-title {
+		font-size: 7.5vw !important
+	}
+	.create-name {
+		font-size: 12.5vw !important
+	}
+	.signup-input-head {
+		font-size: 7.5vw !important
+	}
 }
 @media only screen and (min-width: 800px) {
 	svg.anim {
