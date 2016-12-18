@@ -402,7 +402,7 @@ svg.anim {
 	position: fixed;
 	width: 60%;
 	height: auto;
-	stroke-width: 0.5px
+	stroke-width: 0.375px
 }
 
 svg.anim > * {
@@ -429,7 +429,7 @@ svg.anim > * {
 	fill: none
 }
 
-#p2 {
+#p2, #ab2 {
 	stroke-linecap: round
 }
 
