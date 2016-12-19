@@ -42,7 +42,8 @@ $('.close-modal').on('touchend || click', function(e){
 	setTimeout( function(){
 		$(modal).parents('.overlay').removeClass('open');
 	}, 350);
-
+	
+	window.location.href = './map.html';
 });
 
 $(document).keyup(function(e) {

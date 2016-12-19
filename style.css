@@ -218,7 +218,11 @@ body {
 	padding: 0
 }
 
-input, input:focus {
+input, input:focus, input[type=text] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	
 	outline: none;
 	height: 1.75em;
 	font-size: 2em;
@@ -361,6 +365,16 @@ input, .password, .button {
 	width: 90vw;
 	max-width: 600px
 }
+
+.added-user {
+	float: left;
+	background: #91DCE8;
+	height: 1.5em;
+	display: inline-block;
+	padding: 0.5em 1em 0 1em;
+	margin: 0 0.5em 0.5em 0
+}
+
 .highlight {
 	position: relative;
 	display: inline-block;
