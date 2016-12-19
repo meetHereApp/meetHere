@@ -220,10 +220,9 @@ body {
 
 input, input:focus {
 	outline: none;
-	border: none;
 	height: 1.75em;
 	font-size: 2em;
-	background: #F4F0F0;
+	border: 1px solid #000;
 	padding-left: 10px;
 	font-weight: normal;
 	text-emphasis: none;
@@ -234,6 +233,10 @@ input, input:focus {
 input:not(.mo), input:not(.mo):focus {
 	width: 90vw;
 	max-width: 600px;
+}
+
+.material, .material:focus {
+	border: none
 }
 
 .material, .material:focus, .material-button, .material-button:hover, .material-button-h, .material-button-h:hover  {
@@ -259,7 +262,7 @@ input:not(.mo), input:not(.mo):focus {
 	line-height: 1.75em;
 	font-size: 1.75em;
 	background: #EF7A7A;
-	color: #E4E4E4;
+	color: #000; /* #E4E4E4*/
 	padding: 0 10px 2px 10px;
 	display: inline-block;
 	text-decoration: none;
@@ -276,6 +279,7 @@ input:not(.mo), input:not(.mo):focus {
 	font-size: 2em;
 	background: #EF7A7A; /* #ED6969*/
 	color: black;
+	border-left: none;
 	padding: 0 10px 2px 10px;
 	cursor: pointer
 }
@@ -518,7 +522,7 @@ svg.anim > * {
 	}
 	.material, .material:focus {
 		font-size: 7vw;
-		margin-bottom: 5vw
+		margin-bottom: 5vw;
 	}
 	.support-button {
 		font-size: 5vw

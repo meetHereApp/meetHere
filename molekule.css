@@ -36,7 +36,6 @@ input,
 input:focus {
 	outline: none;
 	-webkit-outline: none;
-	border: none
 }
 
 a,
