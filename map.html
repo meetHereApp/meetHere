@@ -95,10 +95,13 @@
 		
 		<script src="./meetHere.js"></script>
 		<script>
+		var height = (Math.random() * (window.innerHeight - 120)) + 60;
+		var width = (Math.random() * (window.innerWidth - 20)) + 10;
 
 		var i = 0;
 		var r = 0;
-		$('.marker-1').css('top', ((Math.random() * (window.innerHeight - 50)) + 50)).css('left', (Math.random() * (window.innerWidth + 1)));
+		var svg = 0;
+		$('.marker-1').attr('lon', height).attr('lat', width).css('top', height).css('left', width);
 
 		$(document).ready(function() {
 			$(".animsition").animsition({
@@ -151,14 +154,14 @@
 				$('#' + i).show("fast");
 
 				// sonar
-				var height = (Math.random() * (window.innerHeight - 120)) + 60;
-				var width = (Math.random() * (window.innerWidth - 20)) + 10;
+				height = (Math.random() * (window.innerHeight - 120)) + 60;
+				width = (Math.random() * (window.innerWidth - 20)) + 10;
 				var color = ['', 'marker-1', 'marker-2'];
 
 				var sonar = $('<span class="marker"></span>');
 				sonar.css('top', height);
 				sonar.css('left', width);
-				sonar.attr('id', i + '-marker').addClass(color[Math.floor(Math.random() * color.length + 1)]);
+				sonar.attr('id', i + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
 
 				$('body').prepend(sonar);
 
@@ -181,6 +184,39 @@
 		$('#next-button').on('touchend || click', function() {
 			$('.choose-friends, .navbar').slideUp("fast");
 			$('.marker').addClass('larger-marker');
+
+			// find midpoint
+			var lon, lat, count;
+			lon = lat = count = 0;
+			$('.marker').each(function() {
+				lon += parseFloat($(this).attr('lon'), 10);
+				lat += parseFloat($(this).attr('lat'), 10);
+				count++;
+			});
+			var centroid = $('<span class="marker blue-marker"></span>');
+			centroid.css('top', lon / count);
+			centroid.css('left', lat / count);
+			$('body').prepend(centroid);
+
+			// display lines to midpoint
+			$('.marker:not(.blue-marker)').each(function() {
+
+				var halfWidthLarge = $('.blue-marker').width() / 2;
+				var halfHeightLarge = $('.blue-marker').height() / 2;
+				var halfWidth = $(this).width() / 2;
+				var halfHeight = $(this).height() / 2;
+
+				$('body').prepend('<svg id="svg-' + svg + '" width=' + window.innerWidth + ' height=' + window.innerHeight + ' style="position:fixed;"><line  class="line" x1="' + (parseFloat($(this).attr('lat'), 10) + halfWidth) + '" y1="' + (parseFloat($(this).attr('lon'), 10) + halfHeight) + '" x2="' + (lat / count + halfHeightLarge) + '" y2="' + (lon / count + halfWidthLarge) + '" stroke-width="1" /></svg>');
+
+				svg++;
+			});
+
+			$('svg').each(function() {
+				new Vivus(this, {
+					duration: 100,
+					pathTimingFunction: Vivus.EASE
+				});
+			});
 		});
 		</script>
 		

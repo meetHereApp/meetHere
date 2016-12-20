@@ -529,6 +529,7 @@ svg.anim > * {
 	height: 5em;
 	width: 5em;
 	margin: -2.5em 0 0 -2.5em;
+	animation: semi-sonar 2s linear infinite;
 }
 
 .marker-1 {
@@ -547,6 +548,20 @@ svg.anim > * {
 
 .marker-2:after {
 	box-shadow: 0 0 0 1px #A0A0A0;
+}
+
+.blue-marker {
+	background: #91DCE8;
+	box-shadow: 0 0 0 0.25em #91DCE8, 0 0 3px rgba(145, 220, 232, 0.4);
+	height: 0.8em;
+	width: 0.8em;
+}
+
+.blue-marker:after {
+	box-shadow: 0 0 0 3px #91DCE8;
+	height: 8em;
+	width: 8em;
+	margin: -4em 0 0 -4em;
 }
 
 @keyframes pulse {
@@ -569,6 +584,17 @@ svg.anim > * {
 	}
 }
 
+@keyframes semi-sonar {
+	0% {
+		transform: scale3d(0.375, 0.375, 0.375);
+		opacity: 1
+	}
+	50%, 100% {
+		transform: scale3d(0.625, 0.625, 0.625);
+		opacity: 0
+	}
+}
+
 @keyframes fade {
 	0% {
 		opacity: 0
@@ -577,6 +603,21 @@ svg.anim > * {
 		opacity: 1
 	}
 }
+
+@keyframes fadeLine {
+	0% {
+		stroke: #4F4F4F
+	}
+	100% {
+		stroke: rgba(79, 79, 79, 0.075);
+	}
+}
+
+.line {
+	stroke: rgba(79, 79, 79, 0.075);
+	animation: fadeLine 1.75s ease-in-out;
+}
+
 
 /* MOBILE */
 
