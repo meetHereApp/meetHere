@@ -19,7 +19,11 @@
 
 body {
 	font-family: Avenir-light;
-	color: #4F4F4F
+	color: #4F4F4F;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none
 }
 
 .navbar {
@@ -483,6 +487,80 @@ svg.anim > * {
 .fa-angle-down {
 	vertical-align: middle;
 	color: #A0A0A0
+}
+
+.marker {
+   	animation: fade 0.45s 0.3s forwards, pulse 1s ease-in-out infinite alternate;
+	transition: all .6s;
+	background-color: #EB5757;
+	border-radius: 50%;
+	box-shadow: 0 0 0 0.25em #EB5757, 0 0 3px rgba(235, 87, 87, 0.4);
+	display: block;
+	height: 0.25em;
+	width: 0.25em;
+	opacity: 0;
+	position: fixed;
+	z-index: 0
+}
+
+.marker:after {
+	animation: sonar 2s linear infinite;
+	border-radius: 50%;
+	box-shadow: 0 0 0 1px #EB5757;
+	content: '';
+	height: 2.5em;
+	width: 2.5em;
+	margin: -1.25em 0 0 -1.25em;
+	position: absolute;
+	top: 50%;
+	left: 50%
+}
+
+.marker-1 {
+	background: #F0DAC5;
+	box-shadow: 0 0 0 0.25em #F0DAC5, 0 0 3px rgba(246, 231, 225, 0.4);
+}
+
+.marker-1:after {
+	box-shadow: 0 0 0 1px #F0DAC5;
+}
+
+.marker-2 {
+	background: #A0A0A0;
+	box-shadow: 0 0 0 0.25em #A0A0A0, 0 0 3px rgba(160, 160, 160, 0.4);
+}
+
+.marker-2:after {
+	box-shadow: 0 0 0 1px #A0A0A0;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale3d(0.8, 0.8, 0.8)
+	}
+	100% {
+		transform: scale3d(1, 1, 1)
+	}
+}
+
+@keyframes sonar {
+	0% {
+		transform: scale3d(0.5, 0.5, 0.5);
+		opacity: 1
+	}
+	50%, 100% {
+		transform: scale3d(1, 1, 1);
+		opacity: 0
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0
+	}
+	100% {
+		opacity: 1
+	}
 }
 
 /* MOBILE */

@@ -35,6 +35,8 @@
 	
 	<body class="animsition">
 		
+		<span class="marker marker-1"></span>
+
 		<!-- navbar -->
 		<div class="navbar hero">
 			<div class="col-80 top">
@@ -88,7 +90,9 @@
 		
 		<script src="./meetHere.js"></script>
 		<script>
+
 		var i = 0;
+		$('.marker-1').css('top', ((Math.random() * (window.innerHeight - 50)) + 50)).css('left', (Math.random() * (window.innerWidth + 1)));
 
 		$(document).ready(function() {
 			$(".animsition").animsition({
@@ -132,17 +136,31 @@
 			if(e.which == 13 && !($('#user').val() == ""))
 				$('#user-add-submit').click();
 		});
-		$('#user-add-submit').on('touchend || click', function() {
+		$('#user-add-submit').on('touchend || click', function(e) {
+
 			var input = $('#user').val().trim();
 			if (!(input == "")) {
 				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('added-user').text(input);
 				$('#added-list').append(addedUser);
 				$('#' + i).show("fast");
+
+				// sonar
+				var height = (Math.random() * (window.innerHeight - 120)) + 60;
+				var width = (Math.random() * (window.innerWidth - 20)) + 10;
+				var color = ['', 'marker-1', 'marker-2'];
+
+				var sonar = $('<span class="marker"></span>');
+				sonar.css('top', height);
+				sonar.css('left', width);
+				sonar.addClass(color[Math.floor(Math.random() * color.length + 1)]);
+
+				$('body').prepend(sonar);
 				i++;
 			}
 			$('.added-user').each(function() {
 				$(this).on('touchend || click', function() {
 					$(this).hide("fast");
+					$('.marker:first').hide("fast");
 				});
 			});
 			$('#user').val('');
