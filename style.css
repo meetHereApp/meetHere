@@ -368,11 +368,22 @@ input, .password, .button {
 
 .added-user {
 	float: left;
+	cursor: pointer;
 	background: #91DCE8;
 	height: 1.5em;
 	display: inline-block;
-	padding: 0.5em 1em 0 1em;
+	padding: 0.5em 0.5em 0 0.5em;
 	margin: 0 0.5em 0.5em 0
+}
+
+.added-user:after {
+	padding-left: 1em;
+	line-height: 2.25em;
+	vertical-align: top;
+	font-size: 0.5em;
+	font-family: FontAwesome;
+	content: '\f057';
+	color: #4F4F4F
 }
 
 .highlight {

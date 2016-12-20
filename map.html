@@ -49,28 +49,31 @@
 		</div>
 		<!-- navbar END -->
 				
+			<!--svg class="center-total anim" viewBox="0 0 80 60" id="prop2">
+				<line data-ignore id="df2" x1="28" y1="29.88" x2="44" y2="29.88" transform="translate(0 6.9)"/>
+				<line id="cb2" x1="40" y1="29.88" x2="48" y2="29.88" transform="rotate(-60 48 30)"/>
+
+				<line id="ab2" x1="39.9375" y1="29.88" x2="48" y2="29.88"/>
+				<line id="ad2" x1="39.9" y1="30" x2="48" y2="30" transform="rotate(60 40 30)"/>
+				<circle id="c4" cx="44" cy="36.9" r="16"/>
+				<line id="ae2" x1="44" y1="36.9" x2="60" y2="36.9" transform="rotate(60 44 36.9)"/>
+
+				<circle id="c3" cx="40" cy="29.88" r="24.08"/>
+				<line id="bc2" x1="48" y1="29.88" x2="63.89" y2="29.88"/>
+				<path data-ignore id="p2" d="M 48 29.88 L 48.25 29.88" />
+			</svg>
+
 		<!-- intro -->
 		<div class="intro" style="height:100%">
-			
 			<div class="center-total">
 				<div class="row">
 					<div class="intro-text">
-						Choose your friends by username:
+						Add your friends by username:
 						<br>
 						<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
-							<input class="password" placeholder="dr0berts" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px">
-							<div class="button inline" style="background:none"><i class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-							<div style="text-align:left">
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
-								<div class="added-user">asd</div>
+							<input id="user" class="password" placeholder="dr0berts" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px">
+							<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+							<div id="added-list" style="text-align:left;font-size:1.666em">
 							</div>
 						</div>
 					</div>
@@ -85,6 +88,8 @@
 		
 		<script src="./meetHere.js"></script>
 		<script>
+		var i = 0;
+
 		$(document).ready(function() {
 			$(".animsition").animsition({
 				inClass: 'fade-in',
@@ -106,7 +111,7 @@
 				transition: function(url){ window.location.href = url; }
 			});
 		});
-			
+			/*
 		new Vivus('prop2', {
 				type: "oneByOne", 
 				duration: 250,
@@ -121,7 +126,27 @@
 					pathTimingFunction: Vivus.EASE
 				}, vivusRep);
 			}, 5000);
-		}
+		}*/
+
+		$(document).keyup(function(e) {
+			if(e.which == 13 && !($('#user').val() == ""))
+				$('#user-add-submit').click();
+		});
+		$('#user-add-submit').on('touchend || click', function() {
+			var input = $('#user').val().trim();
+			if (!(input == "")) {
+				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('added-user').text(input);
+				$('#added-list').append(addedUser);
+				$('#' + i).show("fast");
+				i++;
+			}
+			$('.added-user').each(function() {
+				$(this).on('touchend || click', function() {
+					$(this).hide("fast");
+				});
+			});
+			$('#user').val('');
+		});
 		</script>
 		
 	<!-- main container END -->
