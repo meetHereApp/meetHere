@@ -193,13 +193,13 @@
 				lat += parseFloat($(this).attr('lat'), 10);
 				count++;
 			});
-			var centroid = $('<span class="marker blue-marker"></span>');
+			var centroid = $('<span class="blue-marker"></span>');
 			centroid.css('top', lon / count);
 			centroid.css('left', lat / count);
 			$('body').prepend(centroid);
 
 			// display lines to midpoint
-			$('.marker:not(.blue-marker)').each(function() {
+			$('.marker').each(function() {
 
 				var halfWidthLarge = $('.blue-marker').width() / 2;
 				var halfHeightLarge = $('.blue-marker').height() / 2;
