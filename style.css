@@ -615,7 +615,7 @@ svg.anim > * {
 
 .line {
 	stroke: rgba(79, 79, 79, 0.075);
-	animation: fadeLine 1.75s ease-in-out;
+	animation: fadeLine 2.5s ease-in-out;
 }
 
 
