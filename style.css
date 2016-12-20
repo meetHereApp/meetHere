@@ -244,7 +244,7 @@ input:not(.mo), input:not(.mo):focus {
 }
 
 .user-adder {
-	padding-top: 0.5em
+	padding-top: 0.25em
 }
 
 .material, .material:focus {
