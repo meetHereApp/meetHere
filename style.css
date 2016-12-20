@@ -240,7 +240,11 @@ input, input:focus, input[type=text] {
 
 input:not(.mo), input:not(.mo):focus {
 	width: 90vw;
-	max-width: 600px;
+	max-width: 600px
+}
+
+.user-adder {
+	padding-top: 0.5em
 }
 
 .material, .material:focus {
@@ -640,6 +644,9 @@ svg.anim > * {
 	}
 	.support-button {
 		font-size: 5vw
+	}
+	.user-adder {
+		padding-top: 0.5em
 	}
 }
 @media only screen and (min-width: 800px) {
