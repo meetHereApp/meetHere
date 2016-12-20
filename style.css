@@ -516,6 +516,17 @@ svg.anim > * {
 	left: 50%
 }
 
+.larger-marker {
+	height: 0.5em;
+	width: 0.5em;
+}
+
+.larger-marker:after {
+	height: 5em;
+	width: 5em;
+	margin: -2.5em 0 0 -2.5em;
+}
+
 .marker-1 {
 	background: #F0DAC5;
 	box-shadow: 0 0 0 0.25em #F0DAC5, 0 0 3px rgba(246, 231, 225, 0.4);

@@ -70,13 +70,18 @@
 			<div class="center-total">
 				<div class="row">
 					<div class="intro-text">
-						Add your friends by username:
-						<br>
-						<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
-							<input id="user" class="password" placeholder="dr0berts" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px">
-							<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-							<div id="added-list" style="text-align:left;font-size:1.666em">
+						<div class="choose-friends">
+							Add your friends by username:
+							<br>
+							<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
+								<input id="user" class="password" placeholder="dr0berts" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px">
+								<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+								<div id="added-list" style="text-align:left;font-size:1.666em">
+								</div>
+								<br>
 							</div>
+							<br>
+							<div id="next-button" class="support-button password-button material-button inline" style="font-size:0.5em;margin-top:1em;display:none">Next</div>
 						</div>
 					</div>
 				</div>
@@ -92,6 +97,7 @@
 		<script>
 
 		var i = 0;
+		var r = 0;
 		$('.marker-1').css('top', ((Math.random() * (window.innerHeight - 50)) + 50)).css('left', (Math.random() * (window.innerWidth + 1)));
 
 		$(document).ready(function() {
@@ -155,16 +161,26 @@
 				sonar.attr('id', i + '-marker').addClass(color[Math.floor(Math.random() * color.length + 1)]);
 
 				$('body').prepend(sonar);
+
+				$('#next-button').show();
 				i++;
 			}
 			$('.added-user').each(function() {
 				$(this).on('touchend || click', function() {
+					r++;
 					var id = $(this).attr('id');
-					$(this).hide("fast");
+					$(this).addClass('gone').hide("fast");
 					$('#' + id + '-marker').remove();
+					if ($('.added-user:not(.gone)').length == 0) {
+						$('#next-button').hide();
+					}
 				});
 			});
 			$('#user').val('');
+		});
+		$('#next-button').on('touchend || click', function() {
+			$('.choose-friends, .navbar').slideUp("fast");
+			$('.marker').addClass('larger-marker');
 		});
 		</script>
 		
