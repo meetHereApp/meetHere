@@ -152,15 +152,16 @@
 				var sonar = $('<span class="marker"></span>');
 				sonar.css('top', height);
 				sonar.css('left', width);
-				sonar.addClass(color[Math.floor(Math.random() * color.length + 1)]);
+				sonar.attr('id', i + '-marker').addClass(color[Math.floor(Math.random() * color.length + 1)]);
 
 				$('body').prepend(sonar);
 				i++;
 			}
 			$('.added-user').each(function() {
 				$(this).on('touchend || click', function() {
+					var id = $(this).attr('id');
 					$(this).hide("fast");
-					$('.marker:first').hide("fast");
+					$('#' + id + '-marker').remove();
 				});
 			});
 			$('#user').val('');
