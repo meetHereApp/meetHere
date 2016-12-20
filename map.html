@@ -45,6 +45,7 @@
 				</a>
 			</div>
 			<div class="nav-links">
+				<span class="profile-image-nav">MJ</span>
 				<a class="page-link animsition-link help" href="./help">
 					Support</a>
 			</div>
@@ -66,27 +67,36 @@
 			</svg>
 
 		<!-- intro -->
-		<div class="intro" style="height:100%">
-			<div class="center-total">
-				<div class="row">
-					<div class="intro-text">
-						<div class="choose-friends">
-							Add your friends by username:
-							<br>
-							<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
-								<input id="user" class="password user-adder" placeholder="dr0berts" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
-								<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-								<div id="added-list" style="text-align:left;font-size:1.666em">
+			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
+				<div class="center-total">
+					<div class="profile-image">MJ</div>
+					<div class="profile-title profile-name">Michael Jackson</div>
+					<a class="profile-title" href="#">Manage Friends</a>
+					<a class="profile-title" href="#">Preferences</a>
+					<a class="profile-title" href="#">Options</a>
+				</div>
+			</div>
+			<div id="map-input" class="intro" style="height:100%;display:inline-block;">
+				<div class="center-total">
+					<div class="row">
+						<div class="intro-text">
+							<div class="choose-friends">
+								Who do you want to meet with?
+								<br>
+								<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
+									<input id="user" class="password user-adder" placeholder="Add your friends" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
+									<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+									<div id="added-list" style="text-align:left;font-size:1.666em">
+									</div>
+									<br>
 								</div>
 								<br>
+								<div id="next-button" class="support-button password-button material-button inline" style="font-size:0.5em;margin-top:1em;display:none">Next</div>
 							</div>
-							<br>
-							<div id="next-button" class="support-button password-button material-button inline" style="font-size:0.5em;margin-top:1em;display:none">Next</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		<!-- intro END -->
 
 		<!-- scripts -->
@@ -95,6 +105,28 @@
 		
 		<script src="./meetHere.js"></script>
 		<script>
+
+		// no center-total on svg for mobile
+		(function($) {
+			var $window = $(window),
+				$profile = $('#profile'),
+				$mapInput = $('#map-input'),
+				$mobilePro = $('.profile-image-nav');
+
+			function resize() {
+				if ($window.width() < 800) {
+					$profile.hide();
+				} else {
+					$mapInput.addClass('col-75');
+					$mobilePro.hide();
+				}
+			}
+
+			$window
+				.resize(resize)
+				.trigger('resize');
+		})(jQuery);
+
 		var height = (Math.random() * (window.innerHeight - 120)) + 60;
 		var width = (Math.random() * (window.innerWidth - 20)) + 10;
 
@@ -182,7 +214,7 @@
 			$('#user').val('');
 		});
 		$('#next-button').on('touchend || click', function() {
-			$('.choose-friends, .navbar').slideUp("fast");
+			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.marker').addClass('larger-marker');
 
 			// find midpoint
@@ -215,6 +247,8 @@
 				new Vivus(this, {
 					duration: 100,
 					pathTimingFunction: Vivus.EASE
+				}, function() {
+					$('.navbar').slideDown("fast");
 				});
 			});
 		});
