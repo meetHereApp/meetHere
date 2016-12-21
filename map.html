@@ -81,12 +81,15 @@
 					<div class="row">
 						<div class="intro-text">
 							<div class="choose-friends">
-								Who do you want to meet with?
+								With whom do you want to meet?
 								<br>
 								<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
 									<input id="user" class="password user-adder" placeholder="Add your friends" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
 									<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-									<div id="added-list" style="text-align:left;font-size:1.666em">
+									<div style="overflow-y:auto;max-height:7.5em;">
+										<div id="added-list" class="" style="text-align:left;font-size:1.666em">
+											<div class="added-user">Ayaz</div><div class="added-user">Kush</div><div class="added-user">Rajan</div><div class="added-user">Sarah</div><div class="added-user">Manshu</div><div class="added-user">Zipper</div><div class="added-user">Ben</div><div class="added-user">Karen</div><div class="added-user">Ellen</div><div class="added-user">Sergei</div><div class="added-user">Brian</div><div class="added-user">Nicky</div><div class="added-user">Claire</div><div class="added-user">Kevin</div><div class="added-user">Dylan</div><div class="added-user">Patric</div><div class="added-user">Shreya</div><div class="added-user">Serena</div><div class="added-user">Boris</div><div class="added-user">Yellen</div>
+										</div>
 									</div>
 									<br>
 								</div>
@@ -177,6 +180,7 @@
 			if(e.which == 13 && !($('#user').val() == ""))
 				$('#user-add-submit').click();
 		});
+		/*
 		$('#user-add-submit').on('touchend || click', function(e) {
 
 			var input = $('#user').val().trim();
@@ -213,6 +217,20 @@
 			});
 			$('#user').val('');
 		});
+		*/
+
+		var $avora = $(".added-user");
+		$("#user").keyup(function() {
+			var val = $.trim(this.value).toUpperCase();
+			if (val === "")
+				$avora.show();
+			else {
+				$avora.hide();
+				$avora.filter(function() {
+					return -1 != $(this).text().toUpperCase().indexOf(val); }).show();
+			}
+		});
+
 		$('#next-button').on('touchend || click', function() {
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.marker').addClass('larger-marker');
