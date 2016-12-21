@@ -40,11 +40,6 @@ $('.close-modal').on('touchend || click', function(e){
 	var $this = $(this),
 			modal = $($this).data('modal');
 
-	$(modal).removeClass('open');
-	setTimeout( function(){
-		$(modal).parents('.overlay').removeClass('open');
-	}, 350);
-	
 	// login
 	$.post('http://jacobzipper.com:3000/api/signin', {
 		username: $('#login-username').val(),
@@ -52,7 +47,15 @@ $('.close-modal').on('touchend || click', function(e){
 	}, function(data) {
 		loginStatus = data.error;
 		if (loginStatus == 0) {
-			window.location.href = './map'
+			$(modal).removeClass('open');
+			setTimeout( function(){
+				$(modal).parents('.overlay').removeClass('open');
+			}, 350);
+			window.location.href = './map';
+
+		} else {
+			$('#login-username').val('');
+			$('#login-password').val('');
 		}
 	}, "json"
 	);
