@@ -25,10 +25,12 @@
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="./style.css">
 		<link rel="stylesheet" type="text/css" href="./molekule.css">
+		<link rel="stylesheet" type="text/css" href="./waves/waves.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
-	
+
 	<!-- Scripts -->
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js" podsum="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="></script>
+		<script src="./waves/waves.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
 		
 	</head>
@@ -84,11 +86,11 @@
 								With whom do you want to meet?
 								<br>
 								<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
-									<input id="user" class="password user-adder" placeholder="Add your friends" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
+									<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
 									<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
 									<div style="overflow-y:auto;max-height:7.5em;">
 										<div id="added-list" class="" style="text-align:left;font-size:1.666em">
-											<div class="added-user">Ayaz</div><div class="added-user">Kush</div><div class="added-user">Rajan</div><div class="added-user">Sarah</div><div class="added-user">Manshu</div><div class="added-user">Zipper</div><div class="added-user">Ben</div><div class="added-user">Karen</div><div class="added-user">Ellen</div><div class="added-user">Sergei</div><div class="added-user">Brian</div><div class="added-user">Nicky</div><div class="added-user">Claire</div><div class="added-user">Kevin</div><div class="added-user">Dylan</div><div class="added-user">Patrick</div><div class="added-user">Shreya</div><div class="added-user">Serena</div><div class="added-user">Boris</div><div class="added-user">Yellen</div>
+											<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
 										</div>
 									</div>
 									<br>
@@ -107,6 +109,10 @@
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 		
 		<script src="./meetHere.js"></script>
+		<script type="text/javascript">
+			Waves.attach('.friend');
+			Waves.init();
+		</script>
 		<script>
 
 		// no center-total on svg for mobile
@@ -159,33 +165,18 @@
 				transition: function(url){ window.location.href = url; }
 			});
 		});
-			/*
-		new Vivus('prop2', {
-				type: "oneByOne", 
-				duration: 250,
-				pathTimingFunction: Vivus.EASE
-			}, vivusRep);
 			
-		function vivusRep() {
-			setTimeout(function() { 
-				new Vivus('prop2', {
-					type: "oneByOne", 
-					duration: 250,
-					pathTimingFunction: Vivus.EASE
-				}, vivusRep);
-			}, 5000);
-		}*/
-
+		/* OLD FUNCTION FOR SEARCHING AND ADDING FRIENDS VIA DROP
+		 *
 		$(document).keyup(function(e) {
 			if(e.which == 13 && !($('#user').val() == ""))
 				$('#user-add-submit').click();
 		});
-		/*
 		$('#user-add-submit').on('touchend || click', function(e) {
 
 			var input = $('#user').val().trim();
 			if (!(input == "")) {
-				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('added-user').text(input);
+				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('friend').text(input);
 				$('#added-list').append(addedUser);
 				$('#' + i).show("fast");
 
@@ -204,31 +195,64 @@
 				$('#next-button').show();
 				i++;
 			}
-			$('.added-user').each(function() {
+			$('.friend').each(function() {
 				$(this).on('touchend || click', function() {
 					r++;
 					var id = $(this).attr('id');
 					$(this).addClass('gone').hide("fast");
 					$('#' + id + '-marker').remove();
-					if ($('.added-user:not(.gone)').length == 0) {
+					if ($('.friend:not(.gone)').length == 0) {
 						$('#next-button').hide();
 					}
 				});
 			});
 			$('#user').val('');
 		});
-		*/
+		 */
 
-		var $avora = $(".added-user");
-		$("#user").keyup(function() {
+		var $avora = $('.friend');
+		var addedFriends = 0;
+
+		$('#user').keyup(function() {
 			var val = $.trim(this.value).toUpperCase();
-			if (val === "")
+			if (val === '')
 				$avora.show();
 			else {
 				$avora.hide();
 				$avora.filter(function() {
 					return -1 != $(this).text().toUpperCase().indexOf(val); }).show();
 			}
+		});
+
+		$('.friend').each(function() {
+			$(this).on('touchend || click', function() {
+				if ($(this).hasClass('friend-added')) {
+					$(this).removeClass('friend-added');
+
+					var id = $(this).attr('id');
+					$('#' + id + '-marker').remove();
+					if ($('.friend-added').length == 0)
+						$('#next-button').hide();
+				} else {
+					$(this).addClass('friend-added').attr('id', addedFriends);
+					$('#added-list').prepend($(this));
+
+					// sonar
+					height = (Math.random() * (window.innerHeight - 120)) + 60;
+					width = (Math.random() * (window.innerWidth - 20)) + 10;
+					var color = ['', 'marker-1', 'marker-2'];
+
+					var sonar = $('<span class="marker"></span>');
+					sonar.css('top', height);
+					sonar.css('left', width);
+					sonar.attr('id', addedFriends + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
+
+					$('body').prepend(sonar);
+
+					$('#next-button').show();
+					addedFriends++;
+				}
+			});
 		});
 
 		$('#next-button').on('touchend || click', function() {

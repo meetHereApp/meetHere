@@ -374,17 +374,18 @@ input, .password, .button {
 	max-width: 600px
 }
 
-.added-user {
+.friend {
 	float: left;
 	cursor: pointer;
 	background: #91DCE8;
 	height: 1.5em;
 	display: inline-block;
 	padding: 0.5em 0.5em 0 0.5em;
-	margin: 0 0.5em 0.5em 0
+	margin: 0 0.5em 0.5em 0;
+	transition: all 0.5s ease;
 }
 
-/*.added-user:after {
+/*.friend:after {
     padding-left: 1em;
     line-height: 2.25em;
     vertical-align: top;
@@ -393,6 +394,13 @@ input, .password, .button {
     content: '\f057';
     color: #4F4F4F
 }*/
+
+.friend-added {
+	background: #F5AFAF;
+	transition: all 0.5s ease;
+}
+
+/* wrap name in span and highlight that one */
 
 .highlight {
 	position: relative;
