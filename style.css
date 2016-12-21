@@ -181,7 +181,7 @@ body {
 	padding: 75px 0 25px
 }
 
-.number {
+.number, .number:hover, .number:active {
 	background: #EB5757;
 	font-size: 1.5em;
 	padding: 1em 1.25em 0.8em 1.25em;
