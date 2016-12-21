@@ -43,7 +43,7 @@ $('.close-modal').on('touchend || click', function(e){
 		$(modal).parents('.overlay').removeClass('open');
 	}, 350);
 	
-	window.location.href = './map.html';
+	window.location.href = './map';
 });
 
 $(document).keyup(function(e) {
