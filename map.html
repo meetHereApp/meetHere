@@ -69,6 +69,47 @@
 			</svg>
 
 		<!-- intro -->
+			<div id="map" style="height:100%;width:100%;z-index:-1 !important"></div>
+			<script>
+				function myMap() {
+					var mapCanvas = document.getElementById("map");
+					var latitude = 51.5;
+					var longitude = -0.2;
+
+					navigator.geolocation.getCurrentPosition(success, error);
+
+					function success(position) {
+						latitude = position.coords.latitude;
+						longitude = position.coords.longitude;
+
+						var styles = [{
+							featureType: "all",
+stylers: [
+{ saturation: -90 },
+{ lightness: 50 }
+]
+						}];
+						var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+						var mapOptions = {
+							center: new google.maps.LatLng(latitude, longitude),
+							zoom: 15
+						}
+
+						var map = new google.maps.Map(mapCanvas, mapOptions);
+						map.mapTypes.set('map_style', styledMap);
+						map.setMapTypeId('map_style');
+					}
+					function error() {
+						$('#map').text('couldnt do it');
+					}
+				}
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
+			<script>
+				$('#map').attr('class', 'fixed');
+			</script>
+
 			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
 				<div class="center-total">
 					<div class="profile-image">MJ</div>
@@ -228,6 +269,7 @@
 			$(this).on('touchend || click', function() {
 				if ($(this).hasClass('friend-added')) {
 					$(this).removeClass('friend-added');
+					$(this).insertAfter('.friend-added:last');
 
 					var id = $(this).attr('id');
 					$('#' + id + '-marker').remove();

@@ -159,6 +159,10 @@ div:active {
 	display: inline-block
 }
 
+.fixed {
+	position: fixed !important
+}
+
 /* brand */
 
 .logo {
