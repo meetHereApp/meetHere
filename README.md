@@ -1,4 +1,4 @@
-# meetHere <img src="http://ayazhafiz.com/meetHere/img/meetHere.jpg" height=50>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://cdn.ayazhafiz.com/img/bwith-figma.png" height=50>
+# meetHere <img src="http://ayazhafiz.com/meetHere/img/meetHere.svg" height=50>&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://cdn.ayazhafiz.com/img/bwith-figma.png" height=50>
 
 [![Build Status](https://scrutinizer-ci.com/g/ayazhafiz/meetHere/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ayazhafiz/meetHere/build-status/master)&nbsp;&nbsp;&nbsp;&nbsp;[![maxing, hell ya](https://codeclimate.com/github/ayazhafiz/meetHere/badges/gpa.svg)](https://codeclimate.com/github/ayazhafiz/meetHere)&nbsp;&nbsp;&nbsp;&nbsp;[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ayazhafiz/meetHere/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ayazhafiz/meetHere/?branch=master)&nbsp;&nbsp;&nbsp;&nbsp;![Podd](https://img.shields.io/badge/podd-empty-red.svg?style=flat)<!--&nbsp;&nbsp;&nbsp;&nbsp;[![lit](https://codeclimate.com/github/ayazhafiz/meetHere/badges/issue_count.svg)](https://codeclimate.com/github/ayazhafiz/meetHere)-->
   
