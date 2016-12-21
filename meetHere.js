@@ -31,6 +31,8 @@ $('#open-modal, #open-modal-1').on('touchend || click', function(e){
 
 });
 
+var loginStatus;
+
 $('.close-modal').on('touchend || click', function(e){
 	e.preventDefault();
 	e.stopImmediatePropagation();
@@ -43,7 +45,17 @@ $('.close-modal').on('touchend || click', function(e){
 		$(modal).parents('.overlay').removeClass('open');
 	}, 350);
 	
-	window.location.href = './map';
+	// login
+	$.post('http://jacobzipper.com:3000/api/signin', {
+		username: $('#login-username').val(),
+		password: $('#login-password').val()
+	}, function(data) {
+		loginStatus = data.error;
+		if (loginStatus == 0) {
+			window.location.href = './map'
+		}
+	}, "json"
+	);
 });
 
 $(document).keyup(function(e) {
