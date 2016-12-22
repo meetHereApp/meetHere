@@ -76,12 +76,16 @@
 			</svg>
 
 		<!-- intro -->
-			<div id="map" style="height:100%;width:100%;z-index:-1 !important"></div>
+			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
 			<script>
+				var map;
+				var myCenter;
+				var latitude = 51.5;
+				var longitude = -0.2;
+				var loc = {};
+				var markersArray = [];
 				function myMap() {
 					var mapCanvas = document.getElementById("map");
-					var latitude = 51.5;
-					var longitude = -0.2;
 
 					navigator.geolocation.getCurrentPosition(success, error);
 
@@ -101,32 +105,31 @@
 
 						var mapOptions = {
 							center: new google.maps.LatLng(latitude, longitude),
-							zoom: 15
+							zoom: 15,
+							disableDefaultUI: true
 						}
 
-						var map = new google.maps.Map(mapCanvas, mapOptions);
+						map = new google.maps.Map(mapCanvas, mapOptions);
 
-						var myLatLng = {lat: latitude, lng: longitude};
-						var myCenter = new google.maps.LatLng(latitude, longitude);
+						myCenter = new google.maps.LatLng(latitude, longitude);
+						idLocations();
 
-						/*
-						var marker = new google.maps.Marker({
-							position: myLatLng,
+						var marker = new RichMarker({
+							position: myCenter,
 							map: map,
-							content: '<span class="marker">Bar</span>'
-						});*/
-
-						 var marker = new RichMarker({
-							  position: myCenter,
-							  map: map,
-							  draggable: false,
-							  flat:true,
-							  anchor: RichMarkerPosition.MIDDLE,
-							  content: '<span class="map-marker"></span>'
-						  });
+							draggable: false,
+							flat:true,
+							anchor: RichMarkerPosition.MIDDLE,
+							content: '<span class="map-marker"></span>'
+						});
+						markersArray.push(marker);
 
 						map.mapTypes.set('map_style', styledMap);
 						map.setMapTypeId('map_style');
+
+						map.addListener('click', function(e) {
+							placeMarker();
+						});
 					}
 					function error() {
 						$('#map').text('couldnt do it');
@@ -134,6 +137,7 @@
 				}
 			</script>
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
+			<script src="./locations.js"></script>
 			<script src="./richmarker.js"></script>
 
 			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
@@ -156,7 +160,7 @@
 									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
 										<input style="background:none;width:1vw;max-width:10px;margin-bottom:20px;visibility:hidden">
 										<div class="button inline" style="visibility:hidden"><i class="fa fa-fa" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-										<div style="overflow-y:auto;max-height:7.5em;">
+										<div style="overflow-y:auto;max-height:15.5em;">
 											<div id="chosen-list" class="" style="text-align:left;font-size:1.666em">
 											</div>
 										</div>
@@ -170,9 +174,9 @@
 											</div>
 										</div>
 										<br>
+								<div id="next-button" class="support-button password-button material-button inline" style="font-size:1.666666em;margin-top:1em;display:none">Next</div>
 									</div>
 								</div>
-								<div id="next-button" class="support-button password-button material-button inline" style="font-size:0.5em;margin-top:1em;display:none">Next</div>
 							</div>
 						</div>
 					</div>
@@ -334,13 +338,30 @@
 					$('body').prepend(sonar);
 					*/
 
+					var marker = new RichMarker({
+						position: loc[$(this).text()],
+						map: map,
+						draggable: false,
+						flat:true,
+						anchor: RichMarkerPosition.MIDDLE,
+						content: '<span class="blue-marker"></span>'
+					});
+
+					markersArray.push(marker);
+
+					var bounds = new google.maps.LatLngBounds();
+					for (var i = 0; i < markersArray.length; i++) {
+						bounds.extend(markersArray[i].getPosition());
+					}
+
+					map.fitBounds(bounds);
+
 					$('#next-button').show();
 					$('#chosen-list-parent').show("fast");
 					addedFriends++;
 				}
 			});
 		});
-
 		$('#next-button').on('touchend || click', function() {
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.marker').addClass('larger-marker');
