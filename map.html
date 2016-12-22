@@ -33,6 +33,13 @@
 		<script src="http://cdn.ayazhafiz.com/js/waves/waves.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
 		
+		<style>
+			@media only screen and (max-width: 799px) {
+				.hidden-mobile {
+					display: none !important
+				}
+			}
+		</style>
 	</head>
 	
 	<body class="animsition">
@@ -115,7 +122,7 @@
 							  draggable: false,
 							  flat:true,
 							  anchor: RichMarkerPosition.MIDDLE,
-							  content: '<span class="marker"></span>'
+							  content: '<span class="map-marker"></span>'
 						  });
 
 						map.mapTypes.set('map_style', styledMap);
@@ -128,10 +135,6 @@
 			</script>
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
 			<script src="./richmarker.js"></script>
-
-			<script>
-				$('#map').attr('class', 'fixed');
-			</script>
 
 			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
 				<div class="center-total">
@@ -149,17 +152,26 @@
 							<div class="choose-friends">
 								With whom do you want to meet?
 								<br>
-								<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75vw;max-width:500px">
-									<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
-									<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-									<div style="overflow-y:auto;max-height:7.5em;">
-										<div id="added-list" class="" style="text-align:left;font-size:1.666em">
-											<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
+								<div style="width:100%">
+									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
+										<input style="background:none;width:1vw;max-width:10px;margin-bottom:20px;visibility:hidden">
+										<div class="button inline" style="visibility:hidden"><i class="fa fa-fa" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+										<div style="overflow-y:auto;max-height:7.5em;">
+											<div id="chosen-list" class="" style="text-align:left;font-size:1.666em">
+											</div>
 										</div>
 									</div>
-									<br>
+									<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75%;max-width:500px;display:inline-block">
+										<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
+										<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+										<div style="overflow-y:auto;max-height:7.5em;">
+											<div id="added-list" class="" style="text-align:left;font-size:1.666em">
+												<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
+											</div>
+										</div>
+										<br>
+									</div>
 								</div>
-								<br>
 								<div id="next-button" class="support-button password-button material-button inline" style="font-size:0.5em;margin-top:1em;display:none">Next</div>
 							</div>
 						</div>
@@ -174,10 +186,9 @@
 		
 		<script src="./meetHere.js"></script>
 		<script type="text/javascript">
-			Waves.attach('.friend');
-			Waves.init();
-		</script>
-		<script>
+		Waves.attach('.friend');
+		Waves.init();
+		$('#map').attr('class', 'fixed');
 
 		// no center-total on svg for mobile
 		(function($) {
@@ -200,6 +211,7 @@
 				.trigger('resize');
 		})(jQuery);
 
+		/*
 		var height = (Math.random() * (window.innerHeight - 120)) + 60;
 		var width = (Math.random() * (window.innerWidth - 20)) + 10;
 
@@ -207,6 +219,7 @@
 		var r = 0;
 		var svg = 0;
 		$('.marker-1').attr('lon', height).attr('lat', width).css('top', height).css('left', width);
+		*/
 
 		$(document).ready(function() {
 			$(".animsition").animsition({
@@ -292,16 +305,22 @@
 			$(this).on('touchend || click', function() {
 				if ($(this).hasClass('friend-added')) {
 					$(this).removeClass('friend-added');
-					$(this).insertAfter('.friend-added:last');
+					$('#added-list').prepend(this);
 
+					/* OLD FUNCTION FOR REMOVING SONAR
 					var id = $(this).attr('id');
 					$('#' + id + '-marker').remove();
-					if ($('.friend-added').length == 0)
+					*/
+
+					if ($('.friend-added').length == 0) {
 						$('#next-button').hide();
+						$('#chosen-list-parent').hide("fast");
+					}
 				} else {
 					$(this).addClass('friend-added').attr('id', addedFriends);
-					$('#added-list').prepend($(this));
+					$('#chosen-list').prepend($(this));
 
+					/* OLD FUNCTION FOR REMOVING SONAR
 					// sonar
 					height = (Math.random() * (window.innerHeight - 120)) + 60;
 					width = (Math.random() * (window.innerWidth - 20)) + 10;
@@ -313,8 +332,10 @@
 					sonar.attr('id', addedFriends + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
 
 					$('body').prepend(sonar);
+					*/
 
 					$('#next-button').show();
+					$('#chosen-list-parent').show("fast");
 					addedFriends++;
 				}
 			});
@@ -324,6 +345,7 @@
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.marker').addClass('larger-marker');
 
+			/* OLD FUNCTION FOR FINDING MIDPOINT
 			// find midpoint
 			var lon, lat, count;
 			lon = lat = count = 0;
@@ -358,6 +380,7 @@
 					$('.navbar').slideDown("fast");
 				});
 			});
+			*/
 		});
 		</script>
 		
