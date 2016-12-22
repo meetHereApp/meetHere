@@ -617,6 +617,25 @@ svg.anim > * {
 	color: #EB5757
 }
 
+.fade-out-opacity {
+	color: #EB5757;
+	opacity: 0;
+	animation: fade-out-opacity 1s ease-in-out;
+}
+
+.opacity-none {
+	opacity: 0
+}
+
+@keyframes fade-out-opacity {
+	0% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}
+}
+
 @keyframes pulse {
 	0% {
 		transform: scale3d(0.8, 0.8, 0.8)

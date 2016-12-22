@@ -52,10 +52,20 @@ $('.close-modal').on('touchend || click', function(e){
 				$(modal).parents('.overlay').removeClass('open');
 			}, 350);
 			window.location.href = './map';
-
 		} else {
-			$('#login-username').val('');
-			$('#login-password').val('');
+			if (loginStatus == 1) {
+				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 1000);
+			} else {
+				$('#login-status').text('User not found').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 1000);
+			}
+			$('#login-username').val('').val('');
+			$('#login-password').val('').val('');
 		}
 	}, "json"
 	);
