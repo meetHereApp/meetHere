@@ -82,12 +82,14 @@
 						latitude = position.coords.latitude;
 						longitude = position.coords.longitude;
 
-						var styles = [{
-							featureType: "all",
-							stylers: [
-								{ lightness: 75 }
-							]
-						}];
+						var styles = [
+							{
+								featureType: "all",
+								stylers: [
+									{ lightness: 70 }
+								]
+							}
+						];
 						var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
 
 						var mapOptions = {
@@ -96,6 +98,26 @@
 						}
 
 						var map = new google.maps.Map(mapCanvas, mapOptions);
+
+						var myLatLng = {lat: latitude, lng: longitude};
+						var myCenter = new google.maps.LatLng(latitude, longitude);
+
+						/*
+						var marker = new google.maps.Marker({
+							position: myLatLng,
+							map: map,
+							content: '<span class="marker">Bar</span>'
+						});*/
+
+						 var marker = new RichMarker({
+							  position: myCenter,
+							  map: map,
+							  draggable: false,
+							  flat:true,
+							  anchor: RichMarkerPosition.MIDDLE,
+							  content: '<span class="marker"></span>'
+						  });
+
 						map.mapTypes.set('map_style', styledMap);
 						map.setMapTypeId('map_style');
 					}
@@ -105,6 +127,8 @@
 				}
 			</script>
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
+			<script src="./richmarker.js"></script>
+
 			<script>
 				$('#map').attr('class', 'fixed');
 			</script>
