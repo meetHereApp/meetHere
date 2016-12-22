@@ -354,6 +354,8 @@
 						bounds.extend(markersArray[i].getPosition());
 					}
 
+					map.setCenter(bounds.getCenter());
+
 					map.fitBounds(bounds);
 
 					$('#next-button').show();
