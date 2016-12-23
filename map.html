@@ -118,7 +118,7 @@
 							draggable: false,
 							flat:true,
 							anchor: RichMarkerPosition.MIDDLE,
-							content: '<span class="map-marker"></span>'
+							content: '<span class="map-marker">Me</span>'
 						});
 						markersArray.push(marker);
 
@@ -371,7 +371,7 @@
 						flat:true,
 						anchor: RichMarkerPosition.MIDDLE,
 						content: '<span id="' + addedFriends + '-marker" class="map-marker ' + color[Math.floor(Math.random() * color.length + 1)] +
-						'"></span>'
+						'">' + $(this).text() + '</span>'
 					});
 
 					markersArray.push(marker);
