@@ -556,33 +556,33 @@ svg.anim > * {
 }
 
 .larger-marker {
-	height: 0.5em;
-	width: 0.5em;
+	height: 0.85em;
+	width: 0.85em
 }
 
 .larger-marker:after {
-	height: 5em;
-	width: 5em;
-	margin: -2.5em 0 0 -2.5em;
-	animation: semi-sonar 2s linear infinite;
+	height: 3.5em;
+	width: 3.5em;
+	margin: -1.75em 0 0 -1.75em;
+	animation: semi-sonar 2s linear infinite
 }
 
 .marker-1 {
 	background: #F0DAC5;
-	box-shadow: 0 0 0 0.25em #F0DAC5, 0 0 3px rgba(246, 231, 225, 0.4);
+	box-shadow: 0 0 0 0.25em #F0DAC5, 0 0 3px rgba(246, 231, 225, 0.4)
 }
 
 .marker-1:after {
-	box-shadow: 0 0 0 2px #F0DAC5;
+	box-shadow: 0 0 0 2px #F0DAC5
 }
 
 .marker-2 {
 	background: #A0A0A0;
-	box-shadow: 0 0 0 0.25em #A0A0A0, 0 0 3px rgba(160, 160, 160, 0.4);
+	box-shadow: 0 0 0 0.25em #A0A0A0, 0 0 3px rgba(160, 160, 160, 0.4)
 }
 
 .marker-2:after {
-	box-shadow: 0 0 0 2px #A0A0A0;
+	box-shadow: 0 0 0 2px #A0A0A0
 }
 
 .blue-marker {
@@ -592,10 +592,9 @@ svg.anim > * {
 	border-radius: 50%;
 	box-shadow: 0 0 0 0.25em #91DCE8, 0 0 3px rgba(145, 220, 232, 0.4);
 	display: block;
-	height: 0.8em;
-	width: 0.8em;
+	height: 1.2em;
+	width: 1.2em;
 	opacity: 0;
-	position: fixed;
 	z-index: 0
 }
 
@@ -604,9 +603,9 @@ svg.anim > * {
 	border-radius: 50%;
 	box-shadow: 0 0 0 3px #91DCE8;
 	content: '';
-	height: 8em;
-	width: 8em;
-	margin: -4em 0 0 -4em;
+	height: 2.5em;
+	width: 2.5em;
+	margin: -1.25em 0 0 -1.25em;
 	position: absolute;
 	top: 50%;
 	left: 50%
@@ -642,6 +641,25 @@ svg.anim > * {
 .profile-name, .profile-name:hover, .profile-name:active {
 	font-style: italic;
 	color: #EB5757
+}
+
+.chosen-list-horizontal {
+	font-size: 1.666666em;
+	width: 75vw;
+	max-width: 500px;
+    height: 2.5em;
+	margin-bottom: 0.5em;
+    overflow-x: scroll;
+    overflow-y: hidden
+}
+
+.chosen-list-horizontal div div {
+    display: inline-block;
+    float:left
+}
+
+.chosen-list-container{
+    width: 100000px
 }
 
 .fade-out-opacity {
