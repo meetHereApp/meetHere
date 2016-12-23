@@ -315,7 +315,7 @@
 			}
 		});
 		$('.friend').each(function() {
-			$(this).on('touchend || click', function() {
+			$(this).on('click', function() {
 				if ($(this).hasClass('friend-added')) {
 					$(this).removeClass('friend-added');
 					$('#added-list').prepend(this);
@@ -394,7 +394,7 @@
 				}
 			});
 		});
-		$('#next-button').on('touchend || click', function() {
+		$('#next-button').on('click', function() {
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.map-marker').addClass('larger-marker');
 
