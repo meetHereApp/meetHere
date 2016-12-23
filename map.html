@@ -103,6 +103,69 @@
 
 						var mapOptions = {
 							center: new google.maps.LatLng(latitude, longitude),
+<body class="animsition">
+		
+		<span class="marker marker-1"></span>
+
+		<!-- navbar -->
+		<div class="navbar hero">
+			<div class="col-80 top">
+				<a class="brand logo animsition-link" href="./map"
+				   data-animsition-out-class="fade-out">
+				</a>
+			</div>
+			<div class="nav-links">
+				<span class="profile-image-nav">MJ</span>
+				<a class="page-link animsition-link help" href="./help">
+					Support</a>
+			</div>
+		</div>
+		<!-- navbar END -->
+				
+			<!--svg class="center-total anim" viewBox="0 0 80 60" id="prop2">
+				<line data-ignore id="df2" x1="28" y1="29.88" x2="44" y2="29.88" transform="translate(0 6.9)"/>
+				<line id="cb2" x1="40" y1="29.88" x2="48" y2="29.88" transform="rotate(-60 48 30)"/>
+
+				<line id="ab2" x1="39.9375" y1="29.88" x2="48" y2="29.88"/>
+				<line id="ad2" x1="39.9" y1="30" x2="48" y2="30" transform="rotate(60 40 30)"/>
+				<circle id="c4" cx="44" cy="36.9" r="16"/>
+				<line id="ae2" x1="44" y1="36.9" x2="60" y2="36.9" transform="rotate(60 44 36.9)"/>
+
+				<circle id="c3" cx="40" cy="29.88" r="24.08"/>
+				<line id="bc2" x1="48" y1="29.88" x2="63.89" y2="29.88"/>
+				<path data-ignore id="p2" d="M 48 29.88 L 48.25 29.88" />
+			</svg>
+
+		<!-- intro -->
+			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
+			<script>
+				var map;
+				var myCenter;
+				var latitude = 51.5;
+				var longitude = -0.2;
+				var loc = {};
+				var markersArray = [];
+				function myMap() {
+					var mapCanvas = document.getElementById("map");
+
+					navigator.geolocation.getCurrentPosition(success, error);
+
+					function success(position) {
+						latitude = position.coords.latitude;
+						longitude = position.coords.longitude;
+
+						var styles = [
+							{
+								featureType: "all",
+								stylers: [
+									{ lightness: 70 }
+								]
+							}
+						];
+						var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+						var mapOptions = {
+							center: new google.maps.LatLng(latitude, longitude),
 							zoom: 15,
 							disableDefaultUI: true
 						}
@@ -193,6 +256,8 @@
 		
 		<script src="./meetHere.js"></script>
 		<script type="text/javascript">
+		Waves.attach('.friend');
+		Waves.init();
 		$('#map').attr('class', 'fixed');
 
 		// no center-total on svg for mobile
@@ -301,386 +366,6 @@
 		$('#user').keyup(function() {
 			var $avora = $('.friend:not(.friend-added)');
 
-			var val = $.trim(this.value).toUpperCase();
-			if (val === '')
-				$avora.show();
-			else {
-				$avora.hide();
-				$avora.filter(function() {
-					return -1 != $(this).text().toUpperCase().indexOf(val); }).show();
-			}
-		});
-		$('.friend').each(function() {
-			$(this).on('touchend || click', function() {
-				if ($(this).hasClass('friend-added')) {
-					$(this).removeClass('friend-added');
-					$('#added-list').prepend(this);
-
-					var id = $(this).attr('id');
-					$('#' + id + '-marker').remove();
-
-					markersArray[parseInt(id, 10)] = new RichMarker({
-							position: myCenter,
-							map: map,
-							draggable: false,
-							flat:true,
-							anchor: RichMarkerPosition.MIDDLE,
-							content: ''
-						});
-
-					var bounds = new google.maps.LatLngBounds();
-					for (var i = 0; i < markersArray.length; i++) {
-						bounds.extend(markersArray[i].getPosition());
-					}
-
-					map.setCenter(bounds.getCenter());
-
-					map.fitBounds(bounds);
-
-					if ($('.friend-added').length == 0) {
-						$('#next-button').hide();
-						$('#chosen-list-parent').hide("fast");
-						map.setZoom(15);
-					}
-
-				} else {
-					$(this).addClass('friend-added').attr('id', addedFriends);
-					$('#chosen-list').prepend($(this));
-
-					/* OLD FUNCTION FOR REMOVING SONAR
-					// sonar
-					height = (Math.random() * (window.innerHeight - 120)) + 60;
-					width = (Math.random() * (window.innerWidth - 20)) + 10;
-					var color = ['', 'marker-1', 'marker-2'];
-
-					var sonar = $('<span class="marker"></span>');
-					sonar.css('top', height);
-					sonar.css('left', width);
-					sonar.attr('id', addedFriends + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
-
-					$('body').prepend(sonar);
-					*/
-
-					var color = ['', 'marker-1', 'marker-2'];
-					var marker = new RichMarker({
-						position: loc[$(this).text()],
-						map: map,
-						draggable: false,
-						flat:true,
-						anchor: RichMarkerPosition.MIDDLE,
-						content: '<span id="' + addedFriends + '-marker" class="map-marker ' + color[Math.floor(Math.random() * color.length + 1)] +
-						'"></span>'
-					});
-
-					markersArray.push(marker);
-
-					var bounds = new google.maps.LatLngBounds();
-					for (var i = 0; i < markersArray.length; i++) {
-						bounds.extend(markersArray[i].getPosition());
-					}
-
-					map.setCenter(bounds.getCenter());
-					console.log(map.getCenter());
-
-					map.fitBounds(bounds);
-
-					$('#next-button').show();
-					$('#chosen-list-parent').show("fast");
-					addedFriends++;
-				}
-			});
-		});
-		$('#next-button').on('touchend || click', function() {
-			$('.choose-friends, .profile, .navbar').slideUp("fast");
-			$('.map-marker').addClass('larger-marker');
-
-			var marker = new RichMarker({
-				position: map.getCenter(),
-				map: map,
-				draggable: false,
-				flat:true,
-				anchor: RichMarkerPosition.MIDDLE,
-				content: '<span class="blue-marker"></span>'
-			});
-
-			var path = [
-				myCenter,
-				map.getCenter()
-			];
-			var linePath = new google.maps.Polyline({
-				path: path,
-				geodesic: true,
-				strokeColor: '#A0A0A0',
-				strokeOpacity: 0.25,
-				strokeWeight: 1
-			});
-
-			linePath.setMap(map);
-
-			$('.friend-added').each(function() {
-				path = [
-					loc[$(this).text()],
-					map.getCenter()
-				];
-				linePath = new google.maps.Polyline({
-					path: path,
-					geodesic: true,
-					strokeColor: '#A0A0A0',
-					strokeOpacity: 0.25,
-					strokeWeight: 1
-				});
-
-				linePath.setMap(map);
-			});
-
-			setTimeout(function() {
-				$('.navbar').slideDown("fast");
-			}, 1000);
-
-			/* OLD FUNCTION FOR FINDING MIDPOINT
-			// find midpoint
-			var lon, lat, count;
-			lon = lat = count = 0;
-			$('.marker').each(function() {
-				lon += parseFloat($(this).attr('lon'), 10);
-				lat += parseFloat($(this).attr('lat'), 10);
-				count++;
-			});
-			var centroid = $('<span class="blue-marker"></span>');
-			centroid.css('top', lon / count);
-			centroid.css('left', lat / count);
-			$('body').prepend(centroid);
-
-			// display lines to midpoint
-			$('.marker').each(function() {
-
-				var halfWidthLarge = $('.blue-marker').width() / 2;
-				var halfHeightLarge = $('.blue-marker').height() / 2;
-				var halfWidth = $(this).width() / 2;
-				var halfHeight = $(this).height() / 2;
-
-				$('body').prepend('<svg id="svg-' + svg + '" width=' + window.innerWidth + ' height=' + window.innerHeight + ' style="position:fixed;"><line  class="line" x1="' + (parseFloat($(this).attr('lat'), 10) + halfWidth) + '" y1="' + (parseFloat($(this).attr('lon'), 10) + halfHeight) + '" x2="' + (lat / count + halfHeight
-				<path data-ignore id="p2" d="M 48 29.88 L 48.25 29.88" />
-			</svg>
-
-		<!-- intro -->
-			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
-			<script>
-				var map;
-				var myCenter;
-				var latitude = 51.5;
-				var longitude = -0.2;
-				var loc = {};
-				var markersArray = [];
-				function myMap() {
-					var mapCanvas = document.getElementById("map");
-
-					navigator.geolocation.getCurrentPosition(success, error);
-
-					function success(position) {
-						latitude = position.coords.latitude;
-						longitude = position.coords.longitude;
-
-						var styles = [
-							{
-								featureType: "all",
-								stylers: [
-									{ lightness: 70 }
-								]
-							}
-						];
-						var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
-
-						var mapOptions = {
-							center: new google.maps.LatLng(latitude, longitude),
-							zoom: 15,
-							disableDefaultUI: true
-						}
-
-						map = new google.maps.Map(mapCanvas, mapOptions);
-
-						myCenter = new google.maps.LatLng(latitude, longitude);
-						idLocations();
-
-						var marker = new RichMarker({
-							position: myCenter,
-							map: map,
-							draggable: false,
-							flat:true,
-							anchor: RichMarkerPosition.MIDDLE,
-							content: '<span class="map-marker"></span>'
-						});
-						markersArray.push(marker);
-
-						map.mapTypes.set('map_style', styledMap);
-						map.setMapTypeId('map_style');
-
-						map.addListener('click', function(e) {
-							placeMarker();
-						});
-					}
-					function error() {
-						$('#map').text('couldnt do it');
-					}
-				}
-			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
-			<script src="./locations.js"></script>
-			<script src="./richmarker.js"></script>
-
-			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
-				<div class="center-total">
-					<div class="profile-image">MJ</div>
-					<div class="profile-title profile-name">Michael Jackson</div>
-					<a class="profile-title" href="#">Manage Friends</a>
-					<a class="profile-title" href="#">Preferences</a>
-					<a class="profile-title" href="#">Options</a>
-				</div>
-			</div>
-			<div id="map-input" class="intro" style="height:100%;display:inline-block;">
-				<div class="center-total">
-					<div class="row">
-						<div class="intro-text">
-							<div class="choose-friends">
-								With whom do you want to meet?
-								<br>
-								<div style="width:100%">
-									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
-										<input style="background:none;width:1vw;max-width:10px;margin-bottom:20px;visibility:hidden">
-										<div class="button inline" style="visibility:hidden"><i class="fa fa-fa" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-										<div style="overflow-y:auto;max-height:15.5em;">
-											<div id="chosen-list" class="" style="text-align:left;font-size:1.666em">
-											</div>
-										</div>
-									</div>
-									<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75%;max-width:500px;display:inline-block">
-										<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
-										<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-										<div style="overflow-y:auto;max-height:7.5em;">
-											<div id="added-list" class="" style="text-align:left;font-size:1.666em">
-												<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
-											</div>
-										</div>
-										<br>
-								<div id="next-button" class="support-button password-button material-button inline" style="font-size:1.666666em;margin-top:1em;display:none">Next</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- intro END -->
-
-		<!-- scripts -->
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/vivus/0.3.2/vivus.min.js'></script>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
-		
-		<script src="./meetHere.js"></script>
-		<script type="text/javascript">
-		$('#map').attr('class', 'fixed');
-
-		// no center-total on svg for mobile
-		(function($) {
-			var $window = $(window),
-				$profile = $('#profile'),
-				$mapInput = $('#map-input'),
-				$mobilePro = $('.profile-image-nav');
-
-			function resize() {
-				if ($window.width() < 800) {
-					$profile.hide();
-				} else {
-					$mapInput.addClass('col-75');
-					$mobilePro.hide();
-				}
-			}
-
-			$window
-				.resize(resize)
-				.trigger('resize');
-		})(jQuery);
-
-		/*
-		var height = (Math.random() * (window.innerHeight - 120)) + 60;
-		var width = (Math.random() * (window.innerWidth - 20)) + 10;
-
-		var i = 0;
-		var r = 0;
-		var svg = 0;
-		$('.marker-1').attr('lon', height).attr('lat', width).css('top', height).css('left', width);
-		*/
-
-		$(document).ready(function() {
-			$(".animsition").animsition({
-				inClass: 'fade-in',
-				outClass: 'fade-out-left-sm',
-				inDuration: 225,
-				outDuration: 225,
-				linkElement: '.animsition-link',
-				loading: true,
-				loadingParentElement: 'body',
-				loadingClass: 'animsition-loading',
-				loadingInner: '',
-				timeout: false,
-				timeoutCountdown: 5000,
-				onLoadEvent: true,
-				browser: [ 'animation-duration', '-webkit-animation-duration'],
-				overlay : false,
-				overlayClass : 'animsition-overlay-slide',
-				overlayParentElement : 'body',
-				transition: function(url){ window.location.href = url; }
-			});
-		});
-			
-		/* OLD FUNCTION FOR SEARCHING AND ADDING FRIENDS VIA DROP
-		 *
-		$(document).keyup(function(e) {
-			if(e.which == 13 && !($('#user').val() == ""))
-				$('#user-add-submit').click();
-		});
-		$('#user-add-submit').on('touchend || click', function(e) {
-
-			var input = $('#user').val().trim();
-			if (!(input == "")) {
-				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('friend').text(input);
-				$('#added-list').append(addedUser);
-				$('#' + i).show("fast");
-
-				// sonar
-				height = (Math.random() * (window.innerHeight - 120)) + 60;
-				width = (Math.random() * (window.innerWidth - 20)) + 10;
-				var color = ['', 'marker-1', 'marker-2'];
-
-				var sonar = $('<span class="marker"></span>');
-				sonar.css('top', height);
-				sonar.css('left', width);
-				sonar.attr('id', i + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
-
-				$('body').prepend(sonar);
-
-				$('#next-button').show();
-				i++;
-			}
-			$('.friend').each(function() {
-				$(this).on('touchend || click', function() {
-					r++;
-					var id = $(this).attr('id');
-					$(this).addClass('gone').hide("fast");
-					$('#' + id + '-marker').remove();
-					if ($('.friend:not(.gone)').length == 0) {
-						$('#next-button').hide();
-					}
-				});
-			});
-			$('#user').val('');
-		});
-		 */
-
-		var $avora = $('.friend');
-		var addedFriends = 1;
-
-		$('#user').keyup(function() {
 			var val = $.trim(this.value).toUpperCase();
 			if (val === '')
 				$avora.show();
