@@ -166,7 +166,7 @@
 									<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75%;max-width:500px;display:inline-block">
 										<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
 										<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
-										<div class="chosen-list-horizontal">
+										<div id="aaf" class="chosen-list-horizontal" style="display:none">
 											<div id="rrf" class="chosen-list-container">
 
 											</div>
@@ -207,6 +207,8 @@
 					$profile.hide();
 					$('#chosen-list').remove();
 					$('#rrf').attr('id', 'chosen-list');
+					$('#chosen-list-parent').remove();
+					$('#aaf').attr('id', 'chosen-list-parent');
 
 				} else {
 					$mapInput.addClass('col-75');
@@ -311,7 +313,7 @@
 			}
 		});
 		$('.friend').each(function() {
-			$(this).on('touchend || click', function() {
+			$(this).on('click', function() {
 				if ($(this).hasClass('friend-added')) {
 					$(this).removeClass('friend-added');
 					$('#added-list').prepend(this);
@@ -390,7 +392,7 @@
 				}
 			});
 		});
-		$('#next-button').on('touchend || click', function() {
+		$('#next-button').on('click', function() {
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.map-marker').addClass('larger-marker');
 
