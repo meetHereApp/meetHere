@@ -168,6 +168,11 @@
 									<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75%;max-width:500px;display:inline-block">
 										<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
 										<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+										<div class="chosen-list-horizontal">
+											<div id="rrf" class="chosen-list-container">
+
+											</div>
+										</div>
 										<div style="overflow-y:auto;max-height:7.5em;">
 											<div id="added-list" class="" style="text-align:left;font-size:1.666em">
 												<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
@@ -204,9 +209,13 @@
 			function resize() {
 				if ($window.width() < 800) {
 					$profile.hide();
+					$('#chosen-list').remove();
+					$('#rrf').attr('id', 'chosen-list');
+
 				} else {
 					$mapInput.addClass('col-75');
 					$mobilePro.hide();
+					$('.chosen-list-horizontal').remove();
 				}
 			}
 
@@ -291,10 +300,11 @@
 		});
 		 */
 
-		var $avora = $('.friend');
 		var addedFriends = 1;
 
 		$('#user').keyup(function() {
+			var $avora = $('.friend:not(.friend-added)');
+
 			var val = $.trim(this.value).toUpperCase();
 			if (val === '')
 				$avora.show();

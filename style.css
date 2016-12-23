@@ -643,6 +643,25 @@ svg.anim > * {
 	color: #EB5757
 }
 
+.chosen-list-horizontal {
+	font-size: 1.666666em;
+	width: 75vw;
+	max-width: 500px;
+    height: 2.5em;
+	margin-bottom: 0.5em;
+    overflow-x: scroll;
+    overflow-y: hidden
+}
+
+.chosen-list-horizontal div div {
+    display: inline-block;
+    float:left
+}
+
+.chosen-list-container{
+    width: 100000px
+}
+
 .fade-out-opacity {
 	color: #EB5757;
 	opacity: 0;
