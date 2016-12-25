@@ -846,6 +846,9 @@ svg.anim > * {
 	.user-adder {
 		padding-top: 0.5em
 	}
+	.marker-res {
+		font-size: 2vw
+	}
 }
 @media only screen and (min-width: 800px) {
 	svg.anim {
