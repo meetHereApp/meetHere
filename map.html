@@ -82,6 +82,7 @@
 				var myCenter;
 				var latitude = 51.5;
 				var longitude = -0.2;
+				var clickCounter = 0;
 				var loc = {};
 				var markersArray = [];
 				function myMap() {
@@ -127,16 +128,14 @@
 						map.mapTypes.set('map_style', styledMap);
 						map.setMapTypeId('map_style');
 
-						map.addListener('click', function(e) {
-							placeMarker();
-						});
+						infowindow = new google.maps.InfoWindow();
 					}
 					function error() {
 						$('#map').text('couldnt do it');
 					}
 				}
 			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&callback=myMap"></script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&libraries=places&callback=myMap"></script>
 			<script src="./locations.js"></script>
 			<script src="./richmarker.js"></script>
 
@@ -154,7 +153,7 @@
 					<div class="row">
 						<div class="intro-text">
 							<div class="choose-friends">
-								With whom do you want to meet?
+								With whom would you like to meet?
 								<br>
 								<div style="width:100%">
 									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
@@ -316,6 +315,7 @@
 					return -1 != $(this).text().toUpperCase().indexOf(val); }).show();
 			}
 		});
+		var bounds;
 		$('.friend').each(function() {
 			$(this).on('click', function() {
 				if ($(this).hasClass('friend-added')) {
@@ -334,7 +334,7 @@
 							content: ''
 						});
 
-					var bounds = new google.maps.LatLngBounds();
+					bounds = new google.maps.LatLngBounds();
 					for (var i = 0; i < markersArray.length; i++) {
 						bounds.extend(markersArray[i].getPosition());
 					}
@@ -380,13 +380,12 @@
 
 					markersArray.push(marker);
 
-					var bounds = new google.maps.LatLngBounds();
+					bounds = new google.maps.LatLngBounds();
 					for (var i = 0; i < markersArray.length; i++) {
 						bounds.extend(markersArray[i].getPosition());
 					}
 
 					map.setCenter(bounds.getCenter());
-					console.log(map.getCenter());
 
 					map.fitBounds(bounds);
 
@@ -396,10 +395,14 @@
 				}
 			});
 		});
+		var appliedCenter;
 		$('#next-button').on('click', function() {
 			$('.choose-friends, .profile, .navbar').slideUp("fast");
 			$('.map-marker').addClass('larger-marker');
 
+			appliedCenter = map.getCenter();
+
+			// mark center
 			var marker = new RichMarker({
 				position: map.getCenter(),
 				map: map,
@@ -409,6 +412,7 @@
 				content: '<span class="blue-marker"></span>'
 			});
 
+			// mark line from current pos to center
 			var path = [
 				myCenter,
 				map.getCenter()
@@ -423,6 +427,7 @@
 
 			linePath.setMap(map);
 
+			// mark line from each marker to center
 			$('.friend-added').each(function() {
 				path = [
 					loc[$(this).text()],
@@ -439,8 +444,58 @@
 				linePath.setMap(map);
 			});
 
+			// add local resturants
+			var resturants = new google.maps.places.PlacesService(map);
+            resturants.nearbySearch({
+                location : map.getCenter(),
+				rankBy: google.maps.places.RankBy.DISTANCE,
+                types : [ 'restaurant' ]
+            }, resturantCallback);
+            resturants.nearbySearch({
+                location : map.getCenter(),
+				rankBy: google.maps.places.RankBy.DISTANCE,
+                types : [ 'meal_takeaway' ]
+            }, resturantCallback);
+
+			function resturantCallback(results, status) {
+				if (status === google.maps.places.PlacesServiceStatus.OK) {
+					for (var i = 0; i < results.length; i++) {
+						createMarker(results[i]);
+					}
+				}
+			}
+
+			function createMarker(place) {
+				var placeLoc = place.geometry.location;
+
+				var marker = new RichMarker({
+					position: place.geometry.location,
+					map: map,
+					draggable: false,
+					flat: true,
+					anchor: RichMarkerPosition.MIDDLE,
+					content: '<span class="map-marker marker-res" style="cursor:pointer">' + place.name + '</span>'
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent('<a href="https://www.google.com/maps/dir/Current+Location/' + place.geometry.location.lat() + ',' + place.geometry.location.lng() + '">Directions</a>');
+					if (clickCounter % 2 == 1) {
+						map.setCenter(bounds.getCenter());
+						map.fitBounds(bounds);
+						infowindow.close(map, this);
+					} else {
+						map.setCenter(place.geometry.location);
+						map.setZoom(18);
+						infowindow.open(map, this);
+					}
+					clickCounter++;
+				});
+			}
+
+			// allow map manipulation
 			$('#map').css('z-index', '0');
 
+			// show navbar
 			setTimeout(function() {
 				$('.navbar').slideDown("fast");
 			}, 1000);
