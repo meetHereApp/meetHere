@@ -651,6 +651,14 @@ svg.anim > * {
 	left: 50%
 }
 
+a.map-link {
+	border-bottom: 1px dotted
+}
+
+a.map-link:hover {
+	border-bottom: 1px solid
+}
+
 .profile-image, .profile-image:hover, .profile-image:active {
 	font-size: 2em;
 	padding: 1.75em 1.5em 1.5em 1.5em;
