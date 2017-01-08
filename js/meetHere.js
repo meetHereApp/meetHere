@@ -51,7 +51,13 @@ $('.close-modal').on('touchend || click', function(e){
 			setTimeout( function(){
 				$(modal).parents('.overlay').removeClass('open');
 			}, 350);
-			window.location.href = './map';
+
+	$.post('https://guarded-peak-98230.herokuapp.com/getfriends', {
+		}, function(data) {
+			console.log(data.error);
+			ploll = data;
+		}, "json"
+	);
 		} else {
 			if (loginStatus == 1) {
 				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
