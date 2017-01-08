@@ -19,8 +19,8 @@
 
 	<!-- Fonts ## we can self-serve later, not all fonts may be used -->
 		<!-- Font Awesome --><script src="https://use.fontawesome.com/f4adeaf9c5.js"></script>
-		<!-- Avenir --><link href="http://cdn.ayazhafiz.com/fonts/Avenir/stylesheet.css" rel="stylesheet" type="text/css" media="all">
-		<!-- Proxima Nova --><link href="http://cdn.ayazhafiz.com/fonts/proxima-nova/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+		<!-- Avenir --><link href="./Avenir/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+		<!-- Proxima Nova --><link href="./proxima-nova/stylesheet.css" rel="stylesheet" type="text/css" media="all">
 
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="./style.css">
@@ -70,7 +70,7 @@
 			</div>
 		</div>
 		<!-- navbar END -->
-
+		
 		<!-- main -->
 		<div id="centerEr" class="center-total" style="text-align:left">
 			<div id="third" style="padding-left:5%">
@@ -137,7 +137,7 @@
 		<!-- login modal END -->
 
 		<!-- scripts -->
-		<script src="./meetHere.js"></script>
+		<script src="./meetHere.min.js"></script>
 		<script>
 		$(document).ready(function() {
 			$(".animsition").animsition({
@@ -162,6 +162,7 @@
 		});
 		</script>
 		<script>
+			var email, password, fname, lname, phone, uname;
 			// no center-total on signup for mobile
 			(function($) {
 				var $window = $(window),
@@ -182,12 +183,12 @@
 			$('#email').focus();
 			$(document).keyup(function(e) {
 
-				var email = $('#email').val();
-				var password = $('#password').val();
-				var fname = $('#fname').val();
-				var lname = $('#lname').val();
-				var phone = $('#phone').val();
-				var uname = $('#uname').val();
+				email = $('#email').val();
+				password = $('#password').val();
+				fname = $('#fname').val();
+				lname = $('#lname').val();
+				phone = $('#phone').val();
+				uname = $('#uname').val();
 
 				if (email != "" && password != "")
 					$('#next-1').removeClass('hidden');
@@ -214,6 +215,7 @@
 						$('#centerEr').css('padding-top', '0');
 						$('#centerEr').addClass('center-total');
 					});
+				submit();
 				}
 			});
 			$('#next-1').on('touchend || click', function() {
@@ -230,7 +232,23 @@
 					$('#centerEr').css('padding-top', '0');
 					$('#centerEr').addClass('center-total');
 				});
+				submit();
 			})
+			
+			function submit() {
+				$.post('https://guarded-peak-98230.herokuapp.com/signup', {
+					username: uname,
+					password: password,
+					fullname: fname.concat(' ').concat(lname),
+					phone: phone,
+					email: email
+				}, function(data) {
+					signupStatus = data.error;
+					/* 0 = success, 1 = uname taken, 2 = wrong params */
+					console.log(signupStatus);
+				}, "json"
+				);
+			}
 			
 		</script>
 
