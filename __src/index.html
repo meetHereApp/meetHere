@@ -25,15 +25,20 @@
 	<!-- Styles -->
 		<link rel="stylesheet" type="text/css" href="./css/style.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/molekule.min.css">
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
 
 	<!-- Scripts -->
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js" podsum="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+		<script src="./js/pageload.min.js"></script>
 
 	</head>
 
 	<body class="animsition">
+		<div class="se-pre-con">
+			<div class="clock">
+				<div class="hand-one"></div>
+				<div class="hand-two"></div>
+			</div>
+		</div>
 
 		<!-- navbar -->
 		<div class="navbar hero">
@@ -126,28 +131,6 @@
 
 		<script src="./js/meetHere.min.js"></script>
 		<script>
-		$(document).ready(function() {
-			$(".animsition").animsition({
-				inClass: 'fade-in',
-				outClass: 'fade-out-left-sm',
-				inDuration: 225,
-				outDuration: 225,
-				linkElement: '.animsition-link',
-				loading: true,
-				loadingParentElement: 'body',
-				loadingClass: 'animsition-loading',
-				loadingInner: '',
-				timeout: false,
-				timeoutCountdown: 5000,
-				onLoadEvent: true,
-				browser: [ 'animation-duration', '-webkit-animation-duration'],
-				overlay : false,
-				overlayClass : 'animsition-overlay-slide',
-				overlayParentElement : 'body',
-				transition: function(url){ window.location.href = url; }
-			});
-		});
-
 		new Vivus('prop2', {
 				type: "oneByOne",
 				duration: 250,

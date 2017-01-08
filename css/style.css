@@ -788,11 +788,70 @@ a.map-link:hover {
 	}
 }
 
-.line {
-	stroke: rgba(79, 79, 79, 0.075);
-	animation: fadeLine 2.5s ease-in-out;
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: #FFF
+}
+.clock, .clock:hover, .clock:active {
+	height: 20vmin;
+	width: 20vmin;
+	border-radius: 100%;
+	border: 0.3vmin solid #91DCE8;
+	margin: auto;
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0
+}
+.hand-one {
+	position: absolute;
+	height: 10vmin;
+	width: 0.3vmin;
+	left: 0; right: 0; bottom: 10vmin; top: 0;
+	margin: auto;
+	background: #000;
+	-webkit-transform-origin: bottom;
+	background: #EB5757;
+	border-radius: 0.3vmin;
+    -webkit-animation: spin 1.5s infinite linear;
+    -moz-animation: spin 1.5s infinite linear;
+    -ms-animation: spin 1.5s infinite linear;
+    animation: spin 1.5s infinite linear
+}
+.hand-two {
+	position: absolute;
+	height: 10vmin;
+	width: 0.3vmin;
+	left: 0; right: 0; bottom: 0; top: 10vmin;
+	margin: auto;
+	background: #000;
+	-webkit-transform-origin: top;
+	background: #EB5757;
+	border-radius: 0.3vmin;
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -ms-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear
 }
 
+
+@-ms-keyframes spin {
+    100% { -ms-transform: rotate(360deg) }
+}
+@-moz-keyframes spin {
+    100% { -moz-transform: rotate(360deg) }
+}
+@-webkit-keyframes spin {
+    100% { -webkit-transform: rotate(360deg) }
+}
+@keyframes spin {
+    100% { transform:rotate(360deg) }
+}
 
 /* MOBILE */
 
