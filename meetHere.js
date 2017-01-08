@@ -57,24 +57,33 @@ $('.close-modal').on('touchend || click', function(e){
 				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
 				setTimeout(function() {
 					$('#login-status').removeClass('fade-out-opacity');
-				}, 1000);
-			} else {
+				}, 2000);
+			} else if (loginStatus == 2) {
 				$('#login-status').text('User not found').addClass('fade-out-opacity');
 				setTimeout(function() {
 					$('#login-status').removeClass('fade-out-opacity');
-				}, 1000);
+				}, 2000);
+			} else {
+				$('#login-status').text('Incorrect Parameters').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 2000);
 			}
 			$('#login-username').val('').val('');
 			$('#login-password').val('').val('');
+			$('#login-note-button').addClass('disabled').css('cursor', 'default');
 		}
 	}, "json"
 	);
-	/* 3 = incorrect parameters */
 });
 
 $(document).keyup(function(e) {
-	if(e.which == 13 && $('#modal1').hasClass('open'))
+	if (e.which == 13 && $('#modal1').hasClass('open'))
 		$('.close-modal').click();
+	if ($('#login-username').val() != "" && $('#login-password').val() != "")
+		$('#login-note-button').removeClass('disabled').css('cursor', 'pointer');
+	else
+		$('#login-note-button').addClass('disabled').css('cursor', 'default');
 });
 
 // Validation
