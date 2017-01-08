@@ -27,7 +27,7 @@ body {
 a,
 a:hover, 
 a:active,
-a:visited {
+a:visited, button {
 	text-decoration: none;
 	border-bottom: 1px solid
 }
@@ -45,7 +45,7 @@ input,
 input:focus,
 div,
 div:hover,
-div:active {
+div:active, button {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 	-webkit-border-radius:0px
 }
