@@ -105,7 +105,7 @@
 						</div>
 						<div class="hidden-mobile" style="display:inline-block;width:10vw;max-width:25px"></div>
 						<div class="inline">
-							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px"><span class="highlight theme-light-highlight">Username</span></div>
+							<div id="signup-label-username" class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px"><span class="highlight theme-light-highlight">Username</span></div>
 							<div class="input-container mobile-input-max" style="width:40vw;max-width:300px">
 								<input class="mobile-input-max" id="uname" class="password" placeholder="bGanesh" type="text" autocorrect="false" spellcheck="false" style="width:40vw;max-width:300px">
 								<div id="next-2" class="button inline hidden">Next</div>
@@ -115,7 +115,7 @@
 				</div>
 			</div>
 			<div id="last" style="display:none">
-				<div class="create-title" style="font-size:2em;color:#EB5757;font-weight:bold;padding:0;margin:0">
+				<div id="signup-resolution" class="create-title" style="font-size:2em;color:#EB5757;font-weight:bold;padding:0;margin:0">
 					Awesome! Please check your email to verify your account, and then
 					<a id="open-modal-1" class="page-link" href="#" data-modal="#modal1">
 					login</a>
@@ -129,15 +129,16 @@
 			<div class="content" style="padding:0;margin:0;">
 				<input id="login-username" class="mo" placeholder="username" type="name" autocorrect="false" spellcheck="false" style="margin-bottom:10px;margin:none;">
 				<br>
-				<input id="login-password" class="mo" placeholder="password" type="password" autocorrect="false" spellcheck="false" style="margin:none;">
+				<input id="login-password" class="mo" placeholder="password" type="password" autocorrect="false" spellcheck="false" style="margin:none;margin-bottom:0;">
 				<br>
-				<a class="btn material-button close-modal" data-modal="#modal1" href="#">Login</a>
+				<div id="login-status" class="" style="height:60px;line-height:60px;font-size:1.375em;padding:0;margin:0;vertical-align:middle;opacity:0"></div>
+				<button id="login-note-button" class="btn material-button close-modal animsition-link disabled" data-modal="#modal1" href="#">Login</button>
 			</div>
 		</div>
 		<!-- login modal END -->
 
 		<!-- scripts -->
-		<script src="./meetHere.js"></script>
+		<script src="./meetHere.min.js"></script>
 		<script>
 		$(document).ready(function() {
 			$(".animsition").animsition({
@@ -163,6 +164,7 @@
 		</script>
 		<script>
 			var email, password, fname, lname, phone, uname;
+			var unameStatus = "";
 			// no center-total on signup for mobile
 			(function($) {
 				var $window = $(window),
@@ -195,9 +197,9 @@
 				if (!(validateEmail(email)) || password == "")
 					$('#next-1').addClass('hidden');
 
-				if (fname != "" && lname != "" && phone != "" && uname != "")
+				if (fname != "" && lname != "" && phone != "" && uname != "" && unameStatus != "")
 					$('#next-2').removeClass('hidden');
-				if (!(validateName(fname)) || !(validateName(lname)) || !(validatePhone(phone)) || !(validateUserName(uname)))
+				if (!(validateName(fname)) || !(validateName(lname)) || !(validatePhone(phone)) || !(validateUserName(uname)) || unameStatus == "")
 					$('#next-2').addClass('hidden');
 
 				if(e.which == 13 && !($('#next-1').hasClass('hidden'))){
@@ -217,6 +219,27 @@
 					});
 				submit();
 				}
+			});
+			$('#uname').keyup(function() {
+				$.post('https://guarded-peak-98230.herokuapp.com/usernamecheck', {
+					username: $('#uname').val()
+				}, function(data) {
+					console.log(data.error)
+					/* 0 = uname taken, 1 = uname avaliable, 2 = wrong params */
+					if (data.error == 1) {
+						if (fname != "" && lname != "" && phone != "" && $('#uname').val() != "")
+							$('#next-2').removeClass('hidden');
+						unameStatus = "good";
+						$('#uname').css('border-color', '#000');
+					} else {
+						$('#next-2').addClass('hidden');
+						unameStatus = "";
+						$('#uname').css('border-color', '#EB5757');
+						if (data.error == 2)
+							$('#uname').css('border-color', '#000');
+					}
+				}, "json"
+				);
 			});
 			$('#next-1').on('touchend || click', function() {
 				$('#first').slideUp("fast", function() {
@@ -243,9 +266,10 @@
 					phone: phone,
 					email: email
 				}, function(data) {
-					signupStatus = data.error;
+					data.error;
 					/* 0 = success, 1 = uname taken, 2 = wrong params */
-					console.log(signupStatus);
+					if (data.error == 2)
+						$('#signup-resolution').html('Oops! Something went wrong. Please <a id="open-modal-1" class="page-link" href="./signup" data-modal="#modal1">retry</a>')
 				}, "json"
 				);
 			}
