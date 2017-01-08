@@ -33,7 +33,7 @@ a:visited, button {
 }
 
 input, 
-input:focus {
+input:focus, button, button:focus {
 	outline: none;
 	-webkit-outline: none;
 }
