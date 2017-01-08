@@ -41,7 +41,7 @@ $('.close-modal').on('touchend || click', function(e){
 			modal = $($this).data('modal');
 
 	// login
-	$.post('http://jacobzipper.com:3000/api/signin', {
+	$.post('https://guarded-peak-98230.herokuapp.com/signin', {
 		username: $('#login-username').val(),
 		password: $('#login-password').val()
 	}, function(data) {
@@ -69,6 +69,7 @@ $('.close-modal').on('touchend || click', function(e){
 		}
 	}, "json"
 	);
+	/* 3 = incorrect parameters */
 });
 
 $(document).keyup(function(e) {
