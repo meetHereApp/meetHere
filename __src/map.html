@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html class="set set-podd">
+
+	<head podddina_key="👽 || salvageable" encsum="#empty" podsum="#empty">
+
+		<meta charset="utf-8" lang="en uk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>meetHere</title>
+
+	<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="./img/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="./img/favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="./img/favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="./img/favicons/manifest.json">
+		<link rel="mask-icon" href="https://meetHere.github.io/img/favicons/safari-pinned-tab.svg" color="#eb5757">
+		<link rel="shortcut icon" href="./img/favicons/favicon.ico">
+		<meta name="msapplication-config" content="./img/favicons/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+
+	<!-- Fonts ## we can self-serve later, not all fonts may be used -->
+		<!-- Font Awesome --><script src="https://use.fontawesome.com/f4adeaf9c5.js"></script>
+		<!-- Avenir --><link href="./Avenir/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+		<!-- Proxima Nova --><link href="./proxima-nova/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+
+	<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="./css/style.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/molekule.min.css">
+		<link rel="stylesheet" type="text/css" href="./waves/waves.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
+
+	<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js" podsum="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="></script>
+		<script src="./waves/waves.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+
+		<style>
+			@media only screen and (max-width: 799px) {
+				.hidden-mobile {
+					display: none !important
+				}
+			}
+		</style>
+	</head>
+
+	<body class="animsition">
+
+		<span class="marker marker-1"></span>
+
+		<!-- navbar -->
+		<div class="navbar hero">
+			<div class="col-80 top">
+				<a class="brand logo animsition-link" href="./map"
+				   data-animsition-out-class="fade-out">
+				</a>
+			</div>
+			<div class="nav-links">
+				<span class="profile-image-nav">MJ</span>
+				<a class="page-link animsition-link help" href="./help">
+					Support</a>
+			</div>
+		</div>
+		<!-- navbar END -->
+
+			<!--svg class="center-total anim" viewBox="0 0 80 60" id="prop2">
+				<line data-ignore id="df2" x1="28" y1="29.88" x2="44" y2="29.88" transform="translate(0 6.9)"/>
+				<line id="cb2" x1="40" y1="29.88" x2="48" y2="29.88" transform="rotate(-60 48 30)"/>
+
+				<line id="ab2" x1="39.9375" y1="29.88" x2="48" y2="29.88"/>
+				<line id="ad2" x1="39.9" y1="30" x2="48" y2="30" transform="rotate(60 40 30)"/>
+				<circle id="c4" cx="44" cy="36.9" r="16"/>
+				<line id="ae2" x1="44" y1="36.9" x2="60" y2="36.9" transform="rotate(60 44 36.9)"/>
+
+				<circle id="c3" cx="40" cy="29.88" r="24.08"/>
+				<line id="bc2" x1="48" y1="29.88" x2="63.89" y2="29.88"/>
+				<path data-ignore id="p2" d="M 48 29.88 L 48.25 29.88" />
+			</svg>
+
+		<!-- intro -->
+			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
+			<script>
+				var map;
+				var myCenter;
+				var latitude = 51.5;
+				var longitude = -0.2;
+				var clickCounter = 0;
+				var loc = {};
+				var markersArray = [];
+				function myMap() {
+					var mapCanvas = document.getElementById("map");
+
+					navigator.geolocation.getCurrentPosition(success, error);
+
+					function success(position) {
+						latitude = position.coords.latitude;
+						longitude = position.coords.longitude;
+
+						var styles = [
+							{
+								featureType: "all",
+								stylers: [
+									{
+										"lightness": 70
+									}
+								]
+							},
+							{
+								"featureType": "landscape.natural.terrain",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"visibility": "off"
+									}
+								]
+							},
+							{
+								"featureType": "poi",
+								"elementType": "labels",
+								"stylers": [
+									{
+										"visibility": "off"
+									}
+								]
+							},
+							{
+								"featureType": "poi.business",
+								"elementType": "all",
+								"stylers": [
+									{
+										"visibility": "off"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "geometry.stroke",
+								"stylers": [
+									{
+										"visibility": "off"
+									}
+								]
+							}
+						];
+						var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+						var mapOptions = {
+							center: new google.maps.LatLng(latitude, longitude),
+							zoom: 15,
+							disableDefaultUI: true
+						}
+
+						map = new google.maps.Map(mapCanvas, mapOptions);
+
+						myCenter = new google.maps.LatLng(latitude, longitude);
+						idLocations();
+
+						var marker = new RichMarker({
+							position: myCenter,
+							map: map,
+							draggable: false,
+							flat:true,
+							anchor: RichMarkerPosition.MIDDLE,
+							content: '<span class="map-marker">Me</span>'
+						});
+						markersArray.push(marker);
+
+						map.mapTypes.set('map_style', styledMap);
+						map.setMapTypeId('map_style');
+
+						infowindow = new google.maps.InfoWindow();
+					}
+					function error() {
+						$('#map').text('couldnt do it');
+					}
+				}
+			</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV0Q6zglTeVi36cx0v_QeE0wkiveg97HA&libraries=places&callback=myMap"></script>
+			<script src="./js/locations.min.js"></script>
+			<script src="./js/richmarker.min.js"></script>
+
+			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
+				<div class="center-total">
+					<div class="profile-image">MJ</div>
+					<div class="profile-title profile-name">Michael Jackson</div>
+					<a class="profile-title" href="#">Manage Friends</a>
+					<a class="profile-title" href="#">Preferences</a>
+					<a class="profile-title" href="#">Options</a>
+				</div>
+			</div>
+			<div id="map-input" class="intro" style="height:100%;display:inline-block;">
+				<div class="center-total">
+					<div class="row">
+						<div class="intro-text">
+							<div class="choose-friends">
+								With whom would you like to meet?
+								<br>
+								<div style="width:100%">
+									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
+										<input style="background:none;width:1vw;max-width:10px;margin-bottom:20px;visibility:hidden">
+										<div class="button inline" style="visibility:hidden"><i class="fa fa-fa" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+										<div style="overflow-y:auto;max-height:15.5em;">
+											<div id="chosen-list" class="" style="text-align:left;font-size:1.666em">
+											</div>
+										</div>
+									</div>
+									<div class="input-container" style="font-size:0.3em;margin-top:40px;width:75%;max-width:500px;display:inline-block">
+										<input id="user" class="password user-adder" placeholder="Start typing to filter" autocorrect="false" spellcheck="false" style="background:none;width:75vw;max-width:500px;margin-bottom:20px;">
+										<div class="button inline" style="background:none"><i id="user-add-submit" class="fa fa-angle-down" style="color:#EB5757;line-height:1.75em;vertical-align:top;"></i></div>
+										<div id="aaf" class="chosen-list-horizontal" style="display:none">
+											<div id="rrf" class="chosen-list-container">
+
+											</div>
+										</div>
+										<div style="overflow-y:auto;max-height:7.5em;">
+											<div id="added-list" class="" style="text-align:left;font-size:1.666em">
+												<div class="friend">Ayaz</div><div class="friend">Kush</div><div class="friend">Rajan</div><div class="friend">Sarah</div><div class="friend">Manshu</div><div class="friend">Zipper</div><div class="friend">Ben</div><div class="friend">Karen</div><div class="friend">Ellen</div><div class="friend">Sergei</div><div class="friend">Brian</div><div class="friend">Nicky</div><div class="friend">Claire</div><div class="friend">Kevin</div><div class="friend">Dylan</div><div class="friend">Patrick</div><div class="friend">Shreya</div><div class="friend">Serena</div><div class="friend">Boris</div><div class="friend">Yellen</div>
+											</div>
+										</div>
+										<br>
+								<div id="next-button" class="support-button password-button material-button inline" style="font-size:1.666666em;margin-top:1em;display:none">Next</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- intro END -->
+
+		<!-- scripts -->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/vivus/0.3.2/vivus.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
+
+		<script src="./js/meetHere.min.js"></script>
+		<script type="text/javascript">
+		Waves.attach('.friend');
+		Waves.init();
+		$('#map').attr('class', 'fixed');
+
+		// no center-total on svg for mobile
+		(function($) {
+			var $window = $(window),
+				$profile = $('#profile'),
+				$mapInput = $('#map-input'),
+				$mobilePro = $('.profile-image-nav');
+
+			function resize() {
+				if ($window.width() < 800) {
+					$profile.hide();
+					$('#chosen-list').remove();
+					$('#rrf').attr('id', 'chosen-list');
+					$('#chosen-list-parent').remove();
+					$('#aaf').attr('id', 'chosen-list-parent');
+
+				} else {
+					$mapInput.addClass('col-75');
+					$mobilePro.hide();
+					$('.chosen-list-horizontal').remove();
+				}
+			}
+
+			$window
+				.resize(resize)
+				.trigger('resize');
+		})(jQuery);
+
+		/*
+		var height = (Math.random() * (window.innerHeight - 120)) + 60;
+		var width = (Math.random() * (window.innerWidth - 20)) + 10;
+
+		var i = 0;
+		var r = 0;
+		var svg = 0;
+		$('.marker-1').attr('lon', height).attr('lat', width).css('top', height).css('left', width);
+		*/
+
+		$(document).ready(function() {
+			$(".animsition").animsition({
+				inClass: 'fade-in',
+				outClass: 'fade-out-left-sm',
+				inDuration: 225,
+				outDuration: 225,
+				linkElement: '.animsition-link',
+				loading: true,
+				loadingParentElement: 'body',
+				loadingClass: 'animsition-loading',
+				loadingInner: '',
+				timeout: false,
+				timeoutCountdown: 5000,
+				onLoadEvent: true,
+				browser: [ 'animation-duration', '-webkit-animation-duration'],
+				overlay : false,
+				overlayClass : 'animsition-overlay-slide',
+				overlayParentElement : 'body',
+				transition: function(url){ window.location.href = url; }
+			});
+		});
+
+		/* OLD FUNCTION FOR SEARCHING AND ADDING FRIENDS VIA DROP
+		 *
+		$(document).keyup(function(e) {
+			if(e.which == 13 && !($('#user').val() == ""))
+				$('#user-add-submit').click();
+		});
+		$('#user-add-submit').on('touchend || click', function(e) {
+
+			var input = $('#user').val().trim();
+			if (!(input == "")) {
+				var addedUser = $('<div style="display:none"></div>').attr('id', i).addClass('friend').text(input);
+				$('#added-list').append(addedUser);
+				$('#' + i).show("fast");
+
+				// sonar
+				height = (Math.random() * (window.innerHeight - 120)) + 60;
+				width = (Math.random() * (window.innerWidth - 20)) + 10;
+				var color = ['', 'marker-1', 'marker-2'];
+
+				var sonar = $('<span class="marker"></span>');
+				sonar.css('top', height);
+				sonar.css('left', width);
+				sonar.attr('id', i + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
+
+				$('body').prepend(sonar);
+
+				$('#next-button').show();
+				i++;
+			}
+			$('.friend').each(function() {
+				$(this).on('touchend || click', function() {
+					r++;
+					var id = $(this).attr('id');
+					$(this).addClass('gone').hide("fast");
+					$('#' + id + '-marker').remove();
+					if ($('.friend:not(.gone)').length == 0) {
+						$('#next-button').hide();
+					}
+				});
+			});
+			$('#user').val('');
+		});
+		 */
+
+		var addedFriends = 1;
+
+		$('#user').keyup(function() {
+			var $avora = $('.friend:not(.friend-added)');
+
+			var val = $.trim(this.value).toUpperCase();
+			if (val === '')
+				$avora.show();
+			else {
+				$avora.hide();
+				$avora.filter(function() {
+					return -1 != $(this).text().toUpperCase().indexOf(val); }).show();
+			}
+		});
+		var bounds;
+		$('.friend').each(function() {
+			$(this).on('click', function() {
+				if ($(this).hasClass('friend-added')) {
+					$(this).removeClass('friend-added');
+					$('#added-list').prepend(this);
+
+					var id = $(this).attr('id');
+					$('#' + id + '-marker').remove();
+
+					markersArray[parseInt(id, 10)] = new RichMarker({
+							position: myCenter,
+							map: map,
+							draggable: false,
+							flat:true,
+							anchor: RichMarkerPosition.MIDDLE,
+							content: ''
+						});
+
+					bounds = new google.maps.LatLngBounds();
+					for (var i = 0; i < markersArray.length; i++) {
+						bounds.extend(markersArray[i].getPosition());
+					}
+
+					map.setCenter(bounds.getCenter());
+
+					map.fitBounds(bounds);
+
+					if ($('.friend-added').length == 0) {
+						$('#next-button').hide();
+						$('#chosen-list-parent').hide("fast");
+						map.setZoom(15);
+					}
+
+				} else {
+					$(this).addClass('friend-added').attr('id', addedFriends);
+					$('#chosen-list').prepend($(this));
+
+					/* OLD FUNCTION FOR REMOVING SONAR
+					// sonar
+					height = (Math.random() * (window.innerHeight - 120)) + 60;
+					width = (Math.random() * (window.innerWidth - 20)) + 10;
+					var color = ['', 'marker-1', 'marker-2'];
+
+					var sonar = $('<span class="marker"></span>');
+					sonar.css('top', height);
+					sonar.css('left', width);
+					sonar.attr('id', addedFriends + '-marker').attr('lon', height).attr('lat', width).addClass(color[Math.floor(Math.random() * color.length + 1)]);
+
+					$('body').prepend(sonar);
+					*/
+
+					var color = ['', 'marker-1', 'marker-2'];
+					var marker = new RichMarker({
+						position: loc[$(this).text()],
+						map: map,
+						draggable: false,
+						flat:true,
+						anchor: RichMarkerPosition.MIDDLE,
+						content: '<span id="' + addedFriends + '-marker" class="map-marker ' + color[Math.floor(Math.random() * color.length + 1)] +
+						'">' + $(this).text() + '</span>'
+					});
+
+					markersArray.push(marker);
+
+					bounds = new google.maps.LatLngBounds();
+					for (var i = 0; i < markersArray.length; i++) {
+						bounds.extend(markersArray[i].getPosition());
+					}
+
+					map.setCenter(bounds.getCenter());
+
+					map.fitBounds(bounds);
+
+					$('#next-button').show();
+					$('#chosen-list-parent').show("fast");
+					addedFriends++;
+				}
+			});
+		});
+		var appliedCenter;
+		var samePlace;
+		$('#next-button').on('click', function() {
+			$('.choose-friends, .profile, .navbar').slideUp("fast");
+			$('.map-marker').addClass('larger-marker');
+
+			appliedCenter = map.getCenter();
+
+			// mark center
+			var marker = new RichMarker({
+				position: map.getCenter(),
+				map: map,
+				draggable: false,
+				flat:true,
+				anchor: RichMarkerPosition.MIDDLE,
+				content: '<span class="blue-marker"></span>'
+			});
+
+			// mark line from current pos to center
+			var path = [
+				myCenter,
+				map.getCenter()
+			];
+			var linePath = new google.maps.Polyline({
+				path: path,
+				geodesic: true,
+				strokeColor: '#A0A0A0',
+				strokeOpacity: 0.25,
+				strokeWeight: 1
+			});
+
+			linePath.setMap(map);
+
+			// mark line from each marker to center
+			$('.friend-added').each(function() {
+				path = [
+					loc[$(this).text()],
+					map.getCenter()
+				];
+				linePath = new google.maps.Polyline({
+					path: path,
+					geodesic: true,
+					strokeColor: '#A0A0A0',
+					strokeOpacity: 0.25,
+					strokeWeight: 1
+				});
+
+				linePath.setMap(map);
+			});
+
+			// add local resturants
+			var resturants = new google.maps.places.PlacesService(map);
+            resturants.nearbySearch({
+                location : map.getCenter(),
+				rankBy: google.maps.places.RankBy.DISTANCE,
+                types : [ 'restaurant' ]
+            }, resturantCallback);
+            resturants.nearbySearch({
+                location : map.getCenter(),
+				rankBy: google.maps.places.RankBy.DISTANCE,
+                types : [ 'meal_takeaway' ]
+            }, resturantCallback);
+
+			function resturantCallback(results, status) {
+				if (status === google.maps.places.PlacesServiceStatus.OK) {
+					for (var i = 0; i < 9; i++) {
+						createMarker(results[i]);
+					}
+				}
+			}
+
+			function createMarker(place) {
+				var placeLoc = place.geometry.location;
+
+				var lat1 = place.geometry.location.lat();
+				var lat2 = bounds.getCenter().lat();
+				var lon1 = place.geometry.location.lng();
+				var lon2 = bounds.getCenter().lng();
+
+				var R = 6371e3; // metres
+				var φ1 = lat1.toRadians();
+				var φ2 = lat2.toRadians();
+				var Δφ = (lat2-lat1).toRadians();
+				var Δλ = (lon2-lon1).toRadians();
+
+				var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+						Math.cos(φ1) * Math.cos(φ2) *
+						Math.sin(Δλ/2) * Math.sin(Δλ/2);
+				var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+				var distance = R * c;
+				var opp = 1000 / distance;
+				if (opp < 0.45)
+					opp = 0.45;
+
+				var marker = new RichMarker({
+					position: place.geometry.location,
+					map: map,
+					draggable: false,
+					flat: true,
+					anchor: RichMarkerPosition.MIDDLE,
+					content: '<span class="map-marker marker-res" style="cursor:pointer;opacity:' + opp + '">' + place.name + '</span>'
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					var rating = '';
+					if (place.rating != null) {
+						var rating = place.rating;
+						var color;
+
+						if (rating < 1)
+							color = 'c00';
+						else if (rating < 2)
+							color = 'f80';
+						else if (rating < 3)
+							color = 'fb3';
+						else if (rating < 4)
+							color = '00c851';
+						else
+							color = '33b5e5';
+
+						rating = '<span><img src="https://img.shields.io/badge/rating-' + rating + '-' + color + '.svg?style=flat-square"</span><br>';
+					}
+
+					var price = '';
+					if (place.price_level != null) {
+						var price = place.price_level;
+						var color;
+
+						if (price > 4)
+							color = 'c00';
+						else if (price > 3)
+							color = 'f80';
+						else if (price > 2)
+							color = 'fb3';
+						else if (price > 1)
+							color = '00c851';
+						else
+							color = '33b5e5';
+
+						price = '<span><img src="https://img.shields.io/badge/price_level-' + price + '-' + color + '.svg?style=flat-square"</span><br>';
+					}
+
+					infowindow.setContent(rating + price + '<span class="time" style="font-family:Avenir;color:#EB5757"></span><br><a class="map-link" href="https://www.google.com/maps/dir/Current+Location/' + place.geometry.location.lat() + ',' + place.geometry.location.lng() + '" style="font-family:Avenir;color:#91DCE8;text-decoration:none" target="_blank"><i class="fa fa-compass"></i> <i class="fa fa-car"></i> directions</a><hr style="height:1px;margin:0;visibility:hidden">');
+
+
+					var directions = new google.maps.DirectionsService();
+					var dirRequest = {
+						origin: myCenter,
+						destination: place.geometry.location,
+						travelMode: google.maps.DirectionsTravelMode.DRIVING
+					};
+					directions.route(dirRequest, function(response, status) {
+						if (status === 'OK') {
+							var point = response.routes[0].legs[0];
+							$('.time').text(point.duration.text + ' (' + point.distance.text + ')');
+						}
+					});
+
+					if (clickCounter % 2 == 1 && this == samePlace) {
+						map.setCenter(bounds.getCenter());
+						map.fitBounds(bounds);
+						infowindow.close(map, this);
+					} else {
+						map.setCenter(place.geometry.location);
+						map.setZoom(18);
+						infowindow.open(map, this);
+						samePlace = this;
+					}
+					google.maps.event.addListener(infowindow, 'closeclick', function(){
+						map.setCenter(bounds.getCenter());
+						map.fitBounds(bounds);
+						infowindow.close(map, this);
+					});
+					clickCounter++;
+					console.log(place.rating);
+				});
+			}
+
+			// allow map manipulation
+			$('#map').css('z-index', '0');
+
+			// show navbar
+			setTimeout(function() {
+				$('.navbar').slideDown("fast");
+			}, 1000);
+
+			/* OLD FUNCTION FOR FINDING MIDPOINT
+			// find midpoint
+			var lon, lat, count;
+			lon = lat = count = 0;
+			$('.marker').each(function() {
+				lon += parseFloat($(this).attr('lon'), 10);
+				lat += parseFloat($(this).attr('lat'), 10);
+				count++;
+			});
+			var centroid = $('<span class="blue-marker"></span>');
+			centroid.css('top', lon / count);
+			centroid.css('left', lat / count);
+			$('body').prepend(centroid);
+
+			// display lines to midpoint
+			$('.marker').each(function() {
+
+				var halfWidthLarge = $('.blue-marker').width() / 2;
+				var halfHeightLarge = $('.blue-marker').height() / 2;
+				var halfWidth = $(this).width() / 2;
+				var halfHeight = $(this).height() / 2;
+
+				$('body').prepend('<svg id="svg-' + svg + '" width=' + window.innerWidth + ' height=' + window.innerHeight + ' style="position:fixed;"><line  class="line" x1="' + (parseFloat($(this).attr('lat'), 10) + halfWidth) + '" y1="' + (parseFloat($(this).attr('lon'), 10) + halfHeight) + '" x2="' + (lat / count + halfHeightLarge) + '" y2="' + (lon / count + halfWidthLarge) + '" stroke-width="1" /></svg>');
+
+				svg++;
+			});
+
+			$('svg').each(function() {
+				new Vivus(this, {
+					duration: 100,
+					pathTimingFunction: Vivus.EASE
+				}, function() {
+					$('.navbar').slideDown("fast");
+				});
+			});
+			*/
+		});
+		if (typeof(Number.prototype.toRadians) === "undefined") {
+			Number.prototype.toRadians = function() {
+				return this * Math.PI / 180;
+			}
+		}
+		</script>
+
+	<!-- main container END -->
+	</body>
+
+</html>

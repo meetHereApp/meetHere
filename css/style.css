@@ -26,6 +26,10 @@ body {
     -ms-user-select: none
 }
 
+button {
+	font-family: Avenir-light;
+}
+
 .navbar {
 	z-index: 1;
 	font-family: proxima-nova
@@ -36,7 +40,7 @@ body {
 }
 
 .logo {
-    background-image: url(./img/meetHere.svg);
+    background-image: url(../img/meetHere.svg);
 }
 
 .brand {
@@ -131,16 +135,16 @@ body {
 .page-link:before {
 	display: block;
 	content: '';
-	border-top: solid 2px;  
-	transform: scaleX(0);  
+	border-top: solid 2px;
+	transform: scaleX(0);
 	transition: all 0.25s ease-in-out
 }
 
 .page-link:after {
 	display: block;
 	content: '';
-	border-bottom: solid 2px;  
-	transform: scaleX(0);  
+	border-bottom: solid 2px;
+	transform: scaleX(0);
 	transition: all 0.25s ease-in-out
 }
 
@@ -148,7 +152,7 @@ body {
 	border: none;
 	opacity: 1
 }
-  
+
 .page-link:hover:before, .page-link:hover:after{
 	transform: scaleX(1)
 }
@@ -226,7 +230,7 @@ input, input:focus, input[type=text] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-	
+
 	outline: none;
 	height: 1.75em;
 	font-size: 2em;
@@ -261,6 +265,12 @@ input:not(.mo), input:not(.mo):focus {
 
 .material-button-h:hover {
     box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.14), 0 0px 5px 0 rgba(0, 0, 0, 0.12), 0 0px 1px -2px rgba(0, 0, 0, 0.2)
+}
+
+.disabled, .disabled:hover, .disabled:active {
+	box-shadow: none !important;
+	background: #aaa !important;
+	cursor: default
 }
 
 /*
@@ -713,7 +723,7 @@ a.map-link:hover {
 .fade-out-opacity {
 	color: #EB5757;
 	opacity: 0;
-	animation: fade-out-opacity 1s ease-in-out;
+	animation: fade-out-opacity 2s ease-in-out;
 }
 
 .opacity-none {
@@ -721,7 +731,7 @@ a.map-link:hover {
 }
 
 @keyframes fade-out-opacity {
-	0% {
+	0%, 50% {
 		opacity: 1
 	}
 	100% {
@@ -730,7 +740,7 @@ a.map-link:hover {
 }
 
 @keyframes pulse {
-	0% {
+	0%, 50% {
 		transform: scale3d(0.8, 0.8, 0.8)
 	}
 	100% {

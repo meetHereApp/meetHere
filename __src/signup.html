@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="set set-podd">
+
+	<head podddina_key="👽 || salvageable" encsum="#empty" podsum="#empty">
+
+		<meta charset="utf-8" lang="en uk">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Sign Up | meetHere</title>
+
+	<!-- Favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="./img/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="./img/favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="./img/favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="./img/favicons/manifest.json">
+		<link rel="mask-icon" href="http://ayazhafiz.com/meetHere/img/favicons/safari-pinned-tab.svg" color="#eb5757">
+		<link rel="shortcut icon" href="./img/favicons/favicon.ico">
+		<meta name="msapplication-config" content="./img/favicons/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+
+	<!-- Fonts ## we can self-serve later, not all fonts may be used -->
+		<!-- Font Awesome --><script src="https://use.fontawesome.com/f4adeaf9c5.js"></script>
+		<!-- Avenir --><link href="./Avenir/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+		<!-- Proxima Nova --><link href="./proxima-nova/stylesheet.css" rel="stylesheet" type="text/css" media="all">
+
+	<!-- Styles -->
+		<link rel="stylesheet" type="text/css" href="./css/style.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/molekule.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
+		<style>
+			@media only screen and (max-width: 799px) {
+				input:not(.mo), input:not(.mo):focus {
+					font-size: 7vw
+				}
+				.button {
+					font-size: 7vw
+				}
+				.mobile-input-max {
+					width: 90vw !important;
+				}
+				.hidden-mobile {
+					display: none !important
+				}
+			}
+		</style>
+
+	<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js" podsum="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw="></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/js/animsition.min.js"></script>
+
+	</head>
+
+	<body class="animsition">
+
+		<!-- navbar -->
+		<div class="navbar hero">
+			<div class="col-80 top">
+				<a class="brand logo animsition-link" href="./index.html"
+				   data-animsition-out-class="fade-out-right-sm">
+				</a>
+			</div>
+			<div class="nav-links">
+				<span class="current-page">Sign Up</span>
+				<span class="spacer"></span>
+				<a id="open-modal" class="page-link" href="#" data-modal="#modal1">
+					Login</a>
+				<span class="spacer"></span>
+				<a class="page-link animsition-link help" href="./help"
+				   data-animsition-out-class="fade-out-left-sm">
+					Support</a>
+			</div>
+		</div>
+		<!-- navbar END -->
+
+		<!-- main -->
+		<div id="centerEr" class="center-total" style="text-align:left">
+			<div id="third" style="padding-left:5%">
+				<div class="create-title" style="font-size:2.5em;color:#EB5757;font-weight:bold;padding-bottom:40px">Create a <span class="highlight yellow-highlight">profile</span> and start adding your friends</div>
+				<div id="first">
+					<div class="create-name" style="font-size:3em;color:#000;font-weight:bold;padding-bottom:25px">Account</div>
+					<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">Email</div>
+					<input id="email" placeholder="name@example.com" type="email" autofocus="true" autocorrect="false" spellcheck="false">
+					<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">Password</div>
+					<div class="input-container">
+						<input id="password" class="password" placeholder="password" onfocus="this.type='password'" autocorrect="false" spellcheck="false">
+						<div id="next-1" class="button material-button-h inline hidden">Next</div>
+					</div>
+				</div>
+				<div id="second" style="display:none">
+					<div class="create-name" style="font-size:3em;color:#000;font-weight:bold;padding-bottom:25px">Profile</div>
+					<div>
+						<div class="inline">
+							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">First Name</div>
+							<input id="fname" placeholder="Baba" type="text" autocorrect="false" spellcheck="false" style="width:40vw;max-width:300px">
+						</div>
+						<div style="display:inline-block;width:10vw;max-width:25px"></div>
+						<div class="inline">
+							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">Last Name</div>
+							<input id="lname" placeholder="Ganesh" type="text" autocorrect="false" spellcheck="false" style="width:40vw;max-width:300px">
+						</div>
+					</div>
+					<div>
+						<div class="inline">
+							<div class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px">Phone Number</div>
+							<input class="mobile-input-max" id="phone" placeholder="419-270-9201" autocorrect="false" spellcheck="false" maxlength="15" style="width:40vw;max-width:300px">
+						</div>
+						<div class="hidden-mobile" style="display:inline-block;width:10vw;max-width:25px"></div>
+						<div class="inline">
+							<div id="signup-label-username" class="signup-input-head" style="font-size:2em;color:#000;padding-bottom:25px"><span class="highlight theme-light-highlight">Username</span></div>
+							<div class="input-container mobile-input-max" style="width:40vw;max-width:300px">
+								<input class="mobile-input-max" id="uname" class="password" placeholder="bGanesh" type="text" autocorrect="false" spellcheck="false" style="width:40vw;max-width:300px">
+								<div id="next-2" class="button inline hidden">Next</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="last" style="display:none">
+				<div id="signup-resolution" class="create-title" style="font-size:2em;color:#EB5757;font-weight:bold;padding:0;margin:0">
+					Awesome! Please check your email to verify your account, and then
+					<a id="open-modal-1" class="page-link" href="#" data-modal="#modal1">
+					login</a>
+				</div>
+			</div>
+		</div>
+		<!-- main END -->
+
+		<!-- login modal -->
+		<div class="modal" id="modal1">
+			<div class="content" style="padding:0;margin:0;">
+				<input id="login-username" class="mo" placeholder="username" type="name" autocorrect="false" spellcheck="false" style="margin-bottom:10px;margin:none;">
+				<br>
+				<input id="login-password" class="mo" placeholder="password" type="password" autocorrect="false" spellcheck="false" style="margin:none;margin-bottom:0;">
+				<br>
+				<div id="login-status" class="" style="height:60px;line-height:60px;font-size:1.375em;padding:0;margin:0;vertical-align:middle;opacity:0"></div>
+				<button id="login-note-button" class="btn material-button close-modal animsition-link disabled" data-modal="#modal1" href="#">Login</button>
+			</div>
+		</div>
+		<!-- login modal END -->
+
+		<!-- scripts -->
+		<script src="./js/meetHere.min.js"></script>
+		<script>
+		$(document).ready(function() {
+			$(".animsition").animsition({
+				inClass: 'fade-in',
+				outClass: 'fade-out',
+				inDuration: 225,
+				outDuration: 225,
+				linkElement: '.animsition-link',
+				loading: true,
+				loadingParentElement: 'body',
+				loadingClass: 'animsition-loading',
+				loadingInner: '',
+				timeout: false,
+				timeoutCountdown: 5000,
+				onLoadEvent: true,
+				browser: [ 'animation-duration', '-webkit-animation-duration'],
+				overlay : false,
+				overlayClass : 'animsition-overlay-slide',
+				overlayParentElement : 'body',
+				transition: function(url){ window.location.href = url; }
+			});
+		});
+		</script>
+		<script>
+			var email, password, fname, lname, phone, uname;
+			var unameStatus = "";
+			// no center-total on signup for mobile
+			(function($) {
+				var $window = $(window),
+					$center = $('#centerEr');
+
+				function resize() {
+					if ($window.width() < 800) {
+						return $center.removeClass('center-total').css('padding-top', '75px');
+					}
+					$center.addClass('center-total');
+				}
+
+				$window
+					.resize(resize)
+					.trigger('resize');
+			})(jQuery);
+
+			$('#email').focus();
+			$(document).keyup(function(e) {
+
+				email = $('#email').val();
+				password = $('#password').val();
+				fname = $('#fname').val();
+				lname = $('#lname').val();
+				phone = $('#phone').val();
+				uname = $('#uname').val();
+
+				if (email != "" && password != "")
+					$('#next-1').removeClass('hidden');
+				if (!(validateEmail(email)) || password == "")
+					$('#next-1').addClass('hidden');
+
+				if (fname != "" && lname != "" && phone != "" && uname != "" && unameStatus != "")
+					$('#next-2').removeClass('hidden');
+				if (!(validateName(fname)) || !(validateName(lname)) || !(validatePhone(phone)) || !(validateUserName(uname)) || unameStatus == "")
+					$('#next-2').addClass('hidden');
+
+				if(e.which == 13 && !($('#next-1').hasClass('hidden'))){
+					$('#first').slideUp("fast", function() {
+						$('#second').delay(100).slideDown("fast", function() {
+							$('#fname').focus();
+						});
+					});
+				}
+
+				if(e.which == 13 && !($('#next-2').hasClass('hidden'))){
+					$('#third').slideUp("fast", function() {
+						$('#last').delay(100).slideDown("fast");
+						$('#centerEr').css('text-align', 'center');
+						$('#centerEr').css('padding-top', '0');
+						$('#centerEr').addClass('center-total');
+					});
+				submit();
+				}
+			});
+			$('#uname').keyup(function() {
+				$.post('https://guarded-peak-98230.herokuapp.com/usernamecheck', {
+					username: $('#uname').val()
+				}, function(data) {
+					console.log(data.error)
+					/* 0 = uname taken, 1 = uname avaliable, 2 = wrong params */
+					if (data.error == 1) {
+						if (fname != "" && lname != "" && phone != "" && $('#uname').val() != "")
+							$('#next-2').removeClass('hidden');
+						unameStatus = "good";
+						$('#uname').css('border-color', '#000');
+					} else {
+						$('#next-2').addClass('hidden');
+						unameStatus = "";
+						$('#uname').css('border-color', '#EB5757');
+						if (data.error == 2)
+							$('#uname').css('border-color', '#000');
+					}
+				}, "json"
+				);
+			});
+			$('#next-1').on('touchend || click', function() {
+				$('#first').slideUp("fast", function() {
+					$('#second').delay(100).slideDown("fast", function() {
+						$('#fname').focus();
+					});
+				});
+			});
+			$('#next-2').on('touchend || click', function() {
+				$('#third').slideUp("fast", function() {
+					$('#last').delay(100).slideDown("fast");
+					$('#centerEr').css('text-align', 'center');
+					$('#centerEr').css('padding-top', '0');
+					$('#centerEr').addClass('center-total');
+				});
+				submit();
+			})
+
+			function submit() {
+				$.post('https://guarded-peak-98230.herokuapp.com/signup', {
+					username: uname,
+					password: password,
+					fullname: fname.concat(' ').concat(lname),
+					phone: phone,
+					email: email
+				}, function(data) {
+					data.error;
+					/* 0 = success, 1 = uname taken, 2 = wrong params */
+					if (data.error == 2)
+						$('#signup-resolution').html('Oops! Something went wrong. Please <a id="open-modal-1" class="page-link" href="./signup" data-modal="#modal1">retry</a>')
+				}, "json"
+				);
+			}
+
+		</script>
+
+	<!-- main container END -->
+	</body>
+
+</html>
