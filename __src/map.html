@@ -85,10 +85,10 @@
 			<script>
 				var ploll;
 				$.post('https://guarded-peak-98230.herokuapp.com/getfriends', {
-				}, function(data) {
-					console.log(data.friends);
-					ploll = data;
-				}, "json"
+					}, function(data) {
+						console.log(data.error);
+						ploll = data;
+					}, "json"
 				);
 				var map;
 				var myCenter;
