@@ -800,24 +800,24 @@ a.map-link:hover {
 	background: #FFF
 }
 .clock, .clock:hover, .clock:active {
-	height: 20vmin;
-	width: 20vmin;
+	height: 50vmin;
+	width: 50vmin;
 	border-radius: 100%;
-	border: 0.3vmin solid #91DCE8;
+	border: 0.5vmin solid #91DCE8;
 	margin: auto;
 	position: absolute;
 	top: 0; left: 0; bottom: 0; right: 0
 }
 .hand-one {
 	position: absolute;
-	height: 10vmin;
-	width: 0.3vmin;
-	left: 0; right: 0; bottom: 10vmin; top: 0;
+	height: 25vmin;
+	width: 0.5vmin;
+	left: 0; right: 0; bottom: 25vmin; top: 0;
 	margin: auto;
 	background: #000;
 	-webkit-transform-origin: bottom;
 	background: #EB5757;
-	border-radius: 0.3vmin;
+	border-radius: 0.5vmin;
     -webkit-animation: spin 1.5s infinite linear;
     -moz-animation: spin 1.5s infinite linear;
     -ms-animation: spin 1.5s infinite linear;
@@ -825,14 +825,14 @@ a.map-link:hover {
 }
 .hand-two {
 	position: absolute;
-	height: 10vmin;
-	width: 0.3vmin;
-	left: 0; right: 0; bottom: 0; top: 10vmin;
+	height: 25vmin;
+	width: 0.5vmin;
+	left: 0; right: 0; bottom: 0; top: 25vmin;
 	margin: auto;
 	background: #000;
 	-webkit-transform-origin: top;
 	background: #EB5757;
-	border-radius: 0.3vmin;
+	border-radius: 0.5vmin;
     -webkit-animation: spin 1s infinite linear;
     -moz-animation: spin 1s infinite linear;
     -ms-animation: spin 1s infinite linear;

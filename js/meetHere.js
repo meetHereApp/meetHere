@@ -40,7 +40,68 @@ $('.close-modal').on('touchend || click', function(e){
 	var $this = $(this),
 			modal = $($this).data('modal');
 
-	// login
+
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://guarded-peak-98230.herokuapp.com/signin",
+		"method": "POST",
+		"xhrFields": {
+			"withCredentials": true
+		},
+		"data": {
+			"username": "test",
+			"password": "test"
+		}
+	}
+
+	$.ajax(settings).done(function(data) {
+		loginStatus = data.error;
+		if (loginStatus == 0) {
+			$(modal).removeClass('open');
+			setTimeout( function(){
+				$(modal).parents('.overlay').removeClass('open');
+			}, 350);
+			var prefs = {
+				"async": true,
+				"crossDomain": true,
+				"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+				"method": "POST",
+				"xhrFields": {
+					"withCredentials": true
+				},
+				"data": {
+				}
+			}
+
+			$.ajax(prefs).done(function (response) {
+			  console.log(response.error);
+			});
+		} else {
+			if (loginStatus == 1) {
+				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 2000);
+			} else if (loginStatus == 2) {
+				$('#login-status').text('User not found').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 2000);
+			} else {
+				$('#login-status').text('Incorrect Parameters').addClass('fade-out-opacity');
+				setTimeout(function() {
+					$('#login-status').removeClass('fade-out-opacity');
+				}, 2000);
+			}
+			$('#login-username').val('').val('');
+			$('#login-password').val('').val('');
+			$('#login-note-button').addClass('disabled').css('cursor', 'default');
+		}
+	});
+
+	// login__POST
+	/*
 	$.post('https://guarded-peak-98230.herokuapp.com/signin', {
 		username: $('#login-username').val(),
 		password: $('#login-password').val()
@@ -51,7 +112,14 @@ $('.close-modal').on('touchend || click', function(e){
 			setTimeout( function(){
 				$(modal).parents('.overlay').removeClass('open');
 			}, 350);
-			window.location.href = './map';
+			$.post('https://guarded-peak-98230.herokuapp.com/getfriends', {
+					username: 'test',
+					password: 'test',
+					email: 'test@as.com'
+				}, function(data) {
+					console.log(data)
+				}, "json"
+			);
 		} else {
 			if (loginStatus == 1) {
 				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
@@ -75,6 +143,7 @@ $('.close-modal').on('touchend || click', function(e){
 		}
 	}, "json"
 	);
+	*/
 });
 
 $(document).keyup(function(e) {

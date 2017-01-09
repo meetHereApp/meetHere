@@ -84,12 +84,22 @@
 			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
 			<script>
 				var ploll;
-				$.post('https://guarded-peak-98230.herokuapp.com/getfriends', {
-					}, function(data) {
-						console.log(data.error);
-						ploll = data;
-					}, "json"
-				);
+				var prefs = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+					"method": "POST",
+					"xhrFields": {
+						"withCredentials": true
+					},
+					"data": {
+					}
+				}
+
+				$.ajax(prefs).done(function (e) {
+					console.log(e.error);
+					ploll = e;
+				});
 				var map;
 				var myCenter;
 				var latitude = 51.5;
