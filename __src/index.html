@@ -40,6 +40,26 @@
 			</div>
 		</div>
 
+		<script>
+			var init = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+			  "method": "POST",
+			  "xhrFields": {
+				  "withCredentials": true
+			  },
+			  "data": {
+			  }
+			}
+
+			$.ajax(init).done(function (e) {
+				if (e.error == 0) {
+					window.location.href = './map.html'
+				}
+			});
+		</script>
+
 		<!-- navbar -->
 		<div class="navbar hero">
 			<div class="col-80 top">
