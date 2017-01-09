@@ -253,9 +253,9 @@
 			$.ajax(settings).done(function (e) {
 				if (e.error == 0) {
 					$('#profile-name').text(e.fullname);
-					plo = e.fullname.split(' ');
-					fLetter = plo[0].charAt(0).toUpperCase();
-					lLetter = plo[1].charAt(0).toUpperCase();
+					var plo = e.fullname.split(' ');
+					var fLetter = plo[0].charAt(0).toUpperCase();
+					var lLetter = plo[1].charAt(0).toUpperCase();
 					$('#profile-image').text(fLetter + lLetter);
 				}
 			});
