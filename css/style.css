@@ -863,8 +863,8 @@ a.map-link:hover {
 		border: 1px solid #91DCE8
 	}
 	.hand-one, .hand-one:hover, .hand-one:active, .hand-two, .hand-two:hover, .hand-two:active {
-		width: 1px;
-		border-radius: 1px
+		width: 1vmin;
+		border-radius: 1vmin
 	}
 	.col-third {
 		float: none;
