@@ -60,7 +60,7 @@
 			</div>
 			<div class="nav-links">
 				<span id="profile-image-nav" class="profile-image-nav">MJ</span>
-				<a class="page-link animsition-link help" href="./help">
+				<a id="map-page-help" class="page-link animsition-link help" href="./help">
 					Support</a>
 			</div>
 		</div>
@@ -259,6 +259,7 @@
 					var lLetter = plo[1].charAt(0).toUpperCase();
 					$('#profile-image').text(fLetter + lLetter);
 					$('#profile-image-nav').text(fLetter + lLetter);
+					$('#map-page-help').text(e.fullname);
 				}
 			});
 
