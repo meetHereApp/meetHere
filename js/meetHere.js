@@ -50,8 +50,8 @@ $('.close-modal').on('touchend || click', function(e){
 			"withCredentials": true
 		},
 		"data": {
-			"username": "test",
-			"password": "test"
+			"username": $('#login-username').val(),
+			"password": $('#login-password').val()
 		}
 	}
 
