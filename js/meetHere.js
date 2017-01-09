@@ -75,8 +75,9 @@ $('.close-modal').on('touchend || click', function(e){
 			}
 
 			$.ajax(prefs).done(function (response) {
-			  console.log(response.error);
+			  console.log(response);
 			});
+			window.location.href = './map';
 		} else {
 			if (loginStatus == 1) {
 				$('#login-status').text('Wrong password').addClass('fade-out-opacity');
