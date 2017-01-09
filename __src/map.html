@@ -83,23 +83,6 @@
 		<!-- intro -->
 			<div id="map" style="height:104.25%;width:100%;z-index:-1"></div>
 			<script>
-				var ploll;
-				var prefs = {
-					"async": true,
-					"crossDomain": true,
-					"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
-					"method": "POST",
-					"xhrFields": {
-						"withCredentials": true
-					},
-					"data": {
-					}
-				}
-
-				$.ajax(prefs).done(function (e) {
-					console.log(e.error);
-					ploll = e;
-				});
 				var map;
 				var myCenter;
 				var latitude = 51.5;
@@ -201,9 +184,9 @@
 
 			<div id="profile" class="profile col-25" style="height:100%;display:inline-block;">
 				<div class="center-total">
-					<div class="profile-image">MJ</div>
-					<div class="profile-title profile-name">Michael Jackson</div>
-					<a class="profile-title" href="#">Manage Friends</a>
+					<div id="profile-image" class="profile-image">MJ</div>
+					<div id="profile-name" class="profile-title profile-name">Michael Jackson</div>
+					<a id="manage-friends" class="profile-title" href="#" onclick="manageFriends();">Manage Friends</a>
 					<a class="profile-title" href="#">Preferences</a>
 					<a class="profile-title" href="#">Options</a>
 				</div>
@@ -213,7 +196,7 @@
 					<div class="row">
 						<div class="intro-text">
 							<div class="choose-friends">
-								With whom would you like to meet?
+								<span id="map-title-first">With whom would you like to meet?</span>
 								<br>
 								<div style="width:100%">
 									<div id="chosen-list-parent" class="inline hidden-mobile" style="margin-top:40px;width:15%;font-size:0.3em;vertical-align:top;display:none">
@@ -253,6 +236,48 @@
 		<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js'></script>
 
 		<script src="./js/meetHere.min.js"></script>
+
+		<script>
+			var settings = {
+			  "async": true,
+			  "crossDomain": true,
+			  "url": "https://guarded-peak-98230.herokuapp.com/fullname",
+			  "method": "POST",
+			  "xhrFields": {
+				  "withCredentials": true
+			  },
+			  "data": {
+			  }
+			}
+
+			$.ajax(settings).done(function (e) {
+				if (e.error == 0) {
+					$('#profile-name').text(e.fullname);
+					plo = e.fullname.split(' ');
+					fLetter = plo[0].charAt(0).toUpperCase();
+					lLetter = plo[1].charAt(0).toUpperCase();
+					$('#profile-image').text(fLetter + lLetter);
+				}
+			});
+
+			function manageFriends() {
+				$('#map-title-first').html('Add some friends!');
+				$('#user-add-submit').hide();
+				$('#added-list').hide();
+				$('#manage-friends').attr('onclick', 'manageFriendsBack();');
+				$('#manage-friends').html('<i class="fa fa-angle-left" style="color:#EB5757;line-height:1em;vertical-align:top;margin-right:0.5em"></i><i style="color:#91DCE8">Back to map</i>');
+				$('#user').attr('placeholder', 'bGanesh');
+			}
+			function manageFriendsBack() {
+				$('#map-title-first').html('With whom would you like to meet?');
+				$('#user-add-submit').show();
+				$('#added-list').show();
+				$('#manage-friends').attr('onclick', 'manageFriends();');
+				$('#manage-friends').html('Manage Friends');
+				$('#user').attr('placeholder', 'Start typing to filter');
+			}
+		</script>
+
 		<script type="text/javascript">
 		Waves.attach('.friend');
 		Waves.init();
