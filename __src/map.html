@@ -251,6 +251,7 @@
 			}
 
 			$.ajax(settings).done(function (e) {
+				console.log(e);
 				if (e.error == 0) {
 					$('#profile-name').text(e.fullname);
 					var plo = e.fullname.split(' ');
