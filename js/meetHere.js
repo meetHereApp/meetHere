@@ -97,10 +97,6 @@ $('.close-modal').on('touchend || click', function(e){
 	});
 
 	xhr.open("POST", "https://guarded-peak-98230.herokuapp.com/signin");
-	xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-	xhr.setRequestHeader("cache-control", "no-cache");
-	xhr.setRequestHeader("postman-token", "7da05338-bfa7-5dfd-de8e-24b76645d69f");
-
 	xhr.send(data);
 
 	/*
