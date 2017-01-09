@@ -860,7 +860,7 @@ a.map-link:hover {
 		padding-top: 50px
 	}
 	.clock, .clock:hover, .clock:active {
-		border: 1px solid #91DCE8
+		border: 2.5vmin solid #91DCE8
 	}
 	.hand-one, .hand-one:hover, .hand-one:active, .hand-two, .hand-two:hover, .hand-two:active {
 		width: 2.5vmin;
