@@ -40,7 +40,70 @@ $('.close-modal').on('touchend || click', function(e){
 	var $this = $(this),
 			modal = $($this).data('modal');
 
+	var data = "username=hafiz&password=runaway";
 
+	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
+
+	xhr.addEventListener("readystatechange", function () {
+		if (this.readyState === 4) {
+			console.log(this.responseText);
+			var jn = JSON.parse(this.responseText);
+			loginStatus = jn.error;
+
+			if (loginStatus == 0) {
+				$(modal).removeClass('open');
+				setTimeout( function(){
+					$(modal).parents('.overlay').removeClass('open');
+				}, 350);
+				var prefs = {
+					"async": true,
+					"crossDomain": true,
+					"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+					"method": "POST",
+					"xhrFields": {
+						"withCredentials": true
+					},
+					"data": {
+					}
+				}
+
+				$.ajax(prefs).done(function (response) {
+				  console.log(response);
+				});
+				window.location.href = './map';
+			} else {
+				if (loginStatus == 1) {
+					$('#login-status').text('Wrong password').addClass('fade-out-opacity');
+					setTimeout(function() {
+						$('#login-status').removeClass('fade-out-opacity');
+					}, 2000);
+				} else if (loginStatus == 2) {
+					$('#login-status').text('User not found').addClass('fade-out-opacity');
+					setTimeout(function() {
+						$('#login-status').removeClass('fade-out-opacity');
+					}, 2000);
+				} else {
+					$('#login-status').text('Incorrect Parameters').addClass('fade-out-opacity');
+					setTimeout(function() {
+						$('#login-status').removeClass('fade-out-opacity');
+					}, 2000);
+				}
+				$('#login-username').val('').val('');
+				$('#login-password').val('').val('');
+				$('#login-note-button').addClass('disabled').css('cursor', 'default');
+			}
+		}
+	});
+
+	xhr.open("POST", "https://guarded-peak-98230.herokuapp.com/signin");
+	xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+	xhr.setRequestHeader("cache-control", "no-cache");
+	xhr.setRequestHeader("postman-token", "7da05338-bfa7-5dfd-de8e-24b76645d69f");
+
+	xhr.send(data);
+
+	/*
 	var settings = {
 		"async": true,
 		"crossDomain": true,
@@ -100,7 +163,7 @@ $('.close-modal').on('touchend || click', function(e){
 			$('#login-note-button').addClass('disabled').css('cursor', 'default');
 		}
 	});
-
+*/
 	// login__POST
 	/*
 	$.post('https://guarded-peak-98230.herokuapp.com/signin', {
