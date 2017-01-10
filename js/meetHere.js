@@ -29,6 +29,10 @@ $('#open-modal, #open-modal-1').on('touchend || click', function(e){
 
 	});
 
+
+	if ($('#login-username').val() != "" && $('#login-password').val() != "")
+		$('#login-note-button').removeClass('disabled').css('cursor', 'pointer');
+
 });
 
 var loginStatus;
@@ -40,6 +44,7 @@ $('.close-modal').on('touchend || click', function(e){
 	var $this = $(this),
 			modal = $($this).data('modal');
 
+	/* XHR
 	var data = "username=hafiz&password=runaway";
 
 	var xhr = new XMLHttpRequest();
@@ -98,8 +103,7 @@ $('.close-modal').on('touchend || click', function(e){
 
 	xhr.open("POST", "https://guarded-peak-98230.herokuapp.com/signin");
 	xhr.send(data);
-
-	/*
+	*/
 	var settings = {
 		"async": true,
 		"crossDomain": true,
@@ -159,7 +163,7 @@ $('.close-modal').on('touchend || click', function(e){
 			$('#login-note-button').addClass('disabled').css('cursor', 'default');
 		}
 	});
-*/
+
 	// login__POST
 	/*
 	$.post('https://guarded-peak-98230.herokuapp.com/signin', {
