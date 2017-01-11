@@ -64,7 +64,7 @@ $('.close-modal').on('touchend || click', function(e){
 				var prefs = {
 					"async": true,
 					"crossDomain": true,
-					"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+					"url": "https://meethere.herokuapp.com/getfriends",
 					"method": "POST",
 					"xhrFields": {
 						"withCredentials": true
@@ -101,13 +101,13 @@ $('.close-modal').on('touchend || click', function(e){
 		}
 	});
 
-	xhr.open("POST", "https://guarded-peak-98230.herokuapp.com/signin");
+	xhr.open("POST", "https://meethere.herokuapp.com/signin");
 	xhr.send(data);
 	*/
 	var settings = {
 		"async": true,
 		"crossDomain": true,
-		"url": "https://guarded-peak-98230.herokuapp.com/signin",
+		"url": "https://meethere.herokuapp.com/signin",
 		"method": "POST",
 		"xhrFields": {
 			"withCredentials": true
@@ -128,7 +128,7 @@ $('.close-modal').on('touchend || click', function(e){
 			var prefs = {
 				"async": true,
 				"crossDomain": true,
-				"url": "https://guarded-peak-98230.herokuapp.com/getfriends",
+				"url": "https://meethere.herokuapp.com/getfriends",
 				"method": "POST",
 				"xhrFields": {
 					"withCredentials": true
@@ -166,7 +166,7 @@ $('.close-modal').on('touchend || click', function(e){
 
 	// login__POST
 	/*
-	$.post('https://guarded-peak-98230.herokuapp.com/signin', {
+	$.post('https://meethere.herokuapp.com/signin', {
 		username: $('#login-username').val(),
 		password: $('#login-password').val()
 	}, function(data) {
@@ -176,7 +176,7 @@ $('.close-modal').on('touchend || click', function(e){
 			setTimeout( function(){
 				$(modal).parents('.overlay').removeClass('open');
 			}, 350);
-			$.post('https://guarded-peak-98230.herokuapp.com/getfriends', {
+			$.post('https://meethere.herokuapp.com/getfriends', {
 					username: 'test',
 					password: 'test',
 					email: 'test@as.com'

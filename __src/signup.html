@@ -203,7 +203,7 @@
 				}
 			});
 			$('#uname').keyup(function() {
-				$.post('https://guarded-peak-98230.herokuapp.com/usernamecheck', {
+				$.post('https://meethere.herokuapp.com/usernamecheck', {
 					username: $('#uname').val()
 				}, function(data) {
 					console.log(data.error)
@@ -241,7 +241,7 @@
 			})
 
 			function submit() {
-				$.post('https://guarded-peak-98230.herokuapp.com/signup', {
+				$.post('https://meethere.herokuapp.com/signup', {
 					username: uname,
 					password: password,
 					fullname: fname.concat(' ').concat(lname),
