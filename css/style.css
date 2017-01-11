@@ -800,39 +800,63 @@ a.map-link:hover {
 	background: #FFF
 }
 .clock, .clock:hover, .clock:active {
-	height: 50vmin;
-	width: 50vmin;
+	height: 60vmin;
+	width: 60vmin;
 	border-radius: 100%;
-	border: 0.5vmin solid #91DCE8;
+	border: 0.5vmin solid #F5AFAF;
 	margin: auto;
 	position: absolute;
 	top: 0; left: 0; bottom: 0; right: 0
 }
+.inner-clock-parent, .inner-clock-parent:hover, .inner-clock-parent:active {
+	height: 29.5vmin;
+	width: 30vmin;
+	border-radius: 100%;
+	border: 0.5vmin solid transparent;
+	margin: auto;
+	position: absolute;
+	left: 0; bottom: -0.5vmin; right: 0;
+	-webkit-transform-origin: top;
+    -webkit-animation: spin 2.5s infinite linear;
+    -moz-animation: spin 2.5s infinite linear;
+    -ms-animation: spin 2.5s infinite linear;
+    animation: spin 2.5s infinite linear
+}
+.inner-clock, .inner-clock:hover, .inner-clock:active {
+	height: 40vmin;
+	width: 40vmin;
+	border-radius: 100%;
+	border: 0.5vmin solid #91DCE8;
+	margin: auto;
+	position: absolute;
+	left: -5vmin; bottom: -0.5vmin; right: 0;
+}
 .hand-one, .hand-one:hover, .hand-one:active, .hand-two, .hand-two:hover, .hand-two:active {
 	position: absolute;
-	height: 25vmin;
+	height: 30vmin;
 	width: 0.5vmin;
 	margin: auto;
-	background: #EB5757;
+	background: #91DCE8;
 	border-radius: 0.5vmin
 }
 .hand-one, .hand-one:hover, .hand-one:active {
-	left: 0; right: 0; bottom: 25vmin; top: 0;
-	-webkit-transform-origin: bottom;
-    -webkit-animation: spin 1.5s infinite linear;
-    -moz-animation: spin 1.5s infinite linear;
-    -ms-animation: spin 1.5s infinite linear;
-    animation: spin 1.5s infinite linear
+	left: -1vmin; right: 0; bottom: 0;
+	background: #F0DAC5
 }
 .hand-two, .hand-two:hover, .hand-two:active {
-	left: 0; right: 0; bottom: 0; top: 25vmin;
+	right: 0; bottom: 0; top: 0;
+	width: 30vmin; height: 0.5vmin;
 	-webkit-transform-origin: top;
-    -webkit-animation: spin 1s infinite linear;
-    -moz-animation: spin 1s infinite linear;
-    -ms-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear
 }
-
+.inner-hand, .inner-hand:hover, .inner-hand:active {
+	position: absolute;
+	left: 0; top: 20vmin;
+	height: 0.5vmin;
+	width: 19.5vmin;
+	margin: auto;
+	background: #000;
+	border-radius: 0.5vmin
+}
 
 @-ms-keyframes spin {
     100% { -ms-transform: rotate(360deg) }
