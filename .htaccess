@@ -1,4 +1,10 @@
 RewriteEngine on
+RewriteRule ^(.*)$ https://meethere.herokuapp.com/$1 [R=permanent,L]
+
+RewriteEngine On
+RewriteRule ^(.*)$ https://meethere.herokuapp.com/ [R=301]
+
+RewriteEngine on
 RewriteCond %{REQUEST_URI} !^/index.html$
 RewriteCond %{REQUEST_URI} !\.(gif|jpe?g|png|css|js)$
 RewriteRule .* /index.html [L,R=302]
